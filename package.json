@@ -1,17 +1,22 @@
 {
   "dependencies": {
     "express": "^4.21.2",
+    "pg": "^8.13.1",
     "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
     "start": "node ./dist/src.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "swagger": "swagger-cli bundle ./src/swagger/index.yaml --outfile ./src/swagger/output/bundled.yaml --type yaml"
+    "docker:start": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "docker:restart": "npm run docker:stop && npm run docker:start",
+    "swagger:bundle": "swagger-cli bundle ./src/swagger/index.yaml --outfile ./src/swagger/output/bundled.yaml --type yaml"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.5",
+    "@types/pg": "^8.11.10",
     "@types/swagger-ui-express": "^4.1.7",
     "nodemon": "^3.1.9",
     "swagger-cli": "^4.0.4",
