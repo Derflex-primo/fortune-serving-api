@@ -10,13 +10,12 @@ const port = 3000;
 
 // Middleware
 app.use(express.json());
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(yaml.parse(readFileSync('./src/swagger.yaml', 'utf8'))))
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(yaml.parse(readFileSync('./src/swagger/output/bundled.yaml', 'utf8'))))
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello, TypeScript Express!");
 });
-
 
 // Start server
 app.listen(port, () => {

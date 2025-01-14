@@ -15,4 +15,4 @@ paths:
 components:
   schemas:
     template:
-      $ref: "./template_schema.yaml"
+      $ref: "./template_schema.ya
