@@ -1,0 +1,72 @@
+Table users {
+  id interger [pk]
+  full_name string [not null] 
+  address string [not null]
+  email string [unique, not null]
+  phone_number integer [unique, not null]
+  profile_image string
+  role enun('admin', 'users')
+  created_at datetime
+  updated_at datetime
+}
+
+Table templates {
+  id integer [pk]                   
+  name string [not null]               
+  description text                    
+  thumbnail_url string                 
+  is_active boolean [default: true]
+  version string
+  category enum('ecommerce', 'blog', 'portfolio', 'other') [not null]
+  created_by integer 
+  created_at datetime
+  updated_at datetime
+}
+
+Table stores {
+  id interger [pk]
+  user_id interger
+  template_id interger
+  bussiness_name string [unique, not null]
+  bussiness_type enum()
+  created_at datetime
+  updated_at datetime
+}
+
+Table products {
+  id integer [pk]
+  store_id integer
+  name string [not null]
+  description text
+  price decimal(10, 2) [not null]
+  stock integer [default: 0]
+  sku string [unique]
+  is_active boolean [default: true]
+  category enum('electronics', 'fashion', 'home', 'other') [not null]
+  created_at datetime 
+  updated_at datetime
+}
+
+Table transactions {
+  id integer [pk]
+  user_id integer
+  store_id integer
+  product_id integer 
+  quantity integer [not null]
+  total_amount decimal(10, 2) [not null]
+  transaction_date datetime
+  status enum('pending', 'completed', 'failed', 'refunded') [not null]
+  created_at datetime
+  updated_at datetime
+}
+
+Ref: users.id > templates.created_by
+Ref: users.id > transactions.user_id
+
+Ref: templates.id - stores.template_id
+
+Ref: stores.id > products.store_id
+
+Ref: users.id > stores.user_id
+Ref: stores.id > transactions.store_id
+Ref: products.id > transactions.product_id
