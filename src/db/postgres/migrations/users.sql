@@ -1,23 +1,23 @@
+CREATE TYPE status as enum('active', 'inactive', 'banned');
+CREATE TYPE subscription_type as enum('free', 'standard', 'premium');
+
 CREATE TABLE users (
-    id INTEGER PRIMARY KEY,
-    full_name VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(30) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    date_of_birth DATE NOT NULL,
-    profile_image VARCHAR(255),
-    role VARCHAR(10) NOT NULL CHECK (role IN (
-        'users', 
-        'admin'
-    )),
-    is_verified BOOLEAN DEFAULT FALSE,
-    status ENUM('active', 'inactive', 'banned') DEFAULT 'active',
-    last_login DATETIME,
-    last_logout DATETIME,
-    session_token VARCHAR(255),
-    subcription_type ENUM('free', 'standard', 'premium') DEFAULT 'free',
-    terms_accepted_at DATETIME, 
-    privacy_policy_accepted_at DATETIME,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)
+    id                           int primary key,
+    full_name                    varchar(255) not null,
+    phone_number                 varchar(30) unique not null,
+    email                        varchar(255) unique not null,
+    password_hash                varchar(255) not null,
+    date_of_birth                date not null,
+    profile_image                varchar(255),
+    role                         varchar(10) not null check (role in ('users', 'admin')),
+    is_verified                  boolean default false,
+    status                       status default 'active',
+    last_login                   timestamp,
+    last_logout                  timestamp,
+    session_token                varchar(255),
+    subscription_type            subscription_type default 'free',
+    terms_accepted_at            timestamp, 
+    privacy_policy_accepted_at   timestamp,
+    created_at                   timestamp default current_timestamp,
+    updated_at                   timestamp default current_timestamp
+);

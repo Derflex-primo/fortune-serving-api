@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: fortune_serving_db
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./src/db/postgres/migrations:/migrations 
 
 volumes:
   postgres_data:
