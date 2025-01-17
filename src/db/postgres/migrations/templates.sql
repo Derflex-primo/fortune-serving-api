@@ -1,29 +1,32 @@
+CREATE TYPE template_type as enum (
+    'ecommerce',
+    'blog',
+    'portfolio',
+    'entertainment',
+    'marketing',
+    'educational',
+    'health and wellness',
+    'corporate',
+    'real estate',
+    'nonprofit',
+    'food and beverage',
+    'travel',
+    'sports and fitness',
+    'technology',
+    'other'
+);
+
 CREATE TABLE templates (
-     id INTEGER PRIMARY KEY,
-     name VARCHAR(255) NOT NULL,
-     description VARCHAR(255) NOT NULL,
-     thumbnail_image VARCHAR(255),
-     is_active BOOLEAN DEFAULT TRUE,
-     version VARCHAR(10),
-     category VARCHAR(60) NOT NULL CHECK (category IN (
-         'ecommerce', 
-         'blog', 
-         'portfolio', 
-         'entertainment', 
-         'marketing', 
-         'educational', 
-         'health and wellness', 
-         'corporate', 
-         'real estate', 
-         'nonprofit', 
-         'food and beverage', 
-         'travel', 
-         'sports and fitness', 
-         'technology', 
-         'other'
-     )),
-     created_by INTEGER NOT NULL,
-     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-     FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+        id                 int primary key,
+        name               varchar(255) not null,
+        description        varchar(255) not null,
+        version            varchar(10),
+        thumbnail_image    text,
+        is_active          boolean default true,
+        template_type      template_type default 'other'
+        created_by         int not null,
+        created_at         timestamp default current_timestamp,
+        updated_at         timestamp default current_timestamp on update current_timestamp,
+
+        foreign key (created_by) references users (id) one delete cascade on update cascade
 );
