@@ -39,8 +39,8 @@ CREATE TABLE stores (
         template_id        int not null,
         industry           industry default 'other',
         created_at         timestamp default current_timestamp,
-        updated_at         timestamp default current_timestamp one update current_timestamp,
+        updated_at         timestamp default current_timestamp on update current_timestamp,
 
-        foreign key (user_id) references users (id) one delete cascade one update cascade,
-        foreign key (template_id) references templates (id) one delete cascade one update cascade
+        foreign key (user_id) references users (id) on delete cascade on update cascade,
+        foreign key (template_id) references templates (id) on delete cascade on update cascade
 );

@@ -23,10 +23,10 @@ CREATE TABLE templates (
         version            varchar(10),
         thumbnail_image    text,
         is_active          boolean default true,
-        template_type      template_type default 'other'
+        template_type      template_type default 'other',
         created_by         int not null,
         created_at         timestamp default current_timestamp,
         updated_at         timestamp default current_timestamp on update current_timestamp,
 
-        foreign key (created_by) references users (id) one delete cascade on update cascade
+        foreign key (created_by) references users (id) on delete cascade on update cascade
 );
