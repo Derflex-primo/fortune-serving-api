@@ -26,7 +26,7 @@ CREATE TABLE templates (
         template_type      template_type default 'other',
         created_by         int not null,
         created_at         timestamp default current_timestamp,
-        updated_at         timestamp default current_timestamp on update current_timestamp,
+        updated_at         timestamp default current_timestamp,
 
-        foreign key (created_by) references users (id) on delete cascade on update cascade
+        foreign key (created_by) references users(id) on delete cascade on update cascade
 );

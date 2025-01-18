@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: fortune_serving_db
     volumes:
-      - ./src/db/postgres/migrations:/migrations 
+      - ./src/db/postgres/migrations:/docker-entrypoint-initdb.d
 
 volumes:
   postgres_data:

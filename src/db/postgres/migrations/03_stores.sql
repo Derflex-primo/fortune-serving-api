@@ -1,4 +1,4 @@
-CREATE TYPE industry enum (
+CREATE TYPE industry as enum (
     'ecommerce',
     'technology',
     'fashion',
@@ -23,7 +23,7 @@ CREATE TYPE industry enum (
     'logistics and supply chain',
     'energy and utilities',
     'other'
-)
+);
 
 CREATE TABLE stores (
         id                 int primary key,
@@ -39,7 +39,7 @@ CREATE TABLE stores (
         template_id        int not null,
         industry           industry default 'other',
         created_at         timestamp default current_timestamp,
-        updated_at         timestamp default current_timestamp on update current_timestamp,
+        updated_at         timestamp default current_timestamp,
 
         foreign key (user_id) references users (id) on delete cascade on update cascade,
         foreign key (template_id) references templates (id) on delete cascade on update cascade
