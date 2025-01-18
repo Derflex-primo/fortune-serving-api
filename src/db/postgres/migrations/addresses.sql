@@ -1,14 +1,23 @@
+CREATE TYPE address_type enum(
+  'home', 
+  'work', 
+  'billing', 
+  'shipping', 
+  'store'
+);
+
 CREATE TABLE addresses (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER,
-    store_id INTEGER,
-    address_type ENUM('home', 'work', 'billing', 'shipping', 'store') DEFAULT 'home',
-    street_address VARCHAR(255) NOT NULL,
-    city VARCHAR(100) NOT NULL,
-    postal_code VARCHAR(10) NOT NULL,
-    country VARCHAR(100) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE ON UPDATE CASCADE
+    id               int primary key,
+    user_id          int,
+    store_id         int,
+    address_type     address_type default 'home',
+    street_address   varchar(255) not null,
+    city             varchar(100) not null,
+    postal_code      varchar(10) not null,
+    country          varchar(100) not null,
+    created_at       timestamp default current_timestamp,
+    updated_at       timestamp default current_timestamp on update current_timestamp,
+
+    foreign key (user_id) references users(id) on delete cascade on update cascade,
+    foreign key (store_id) references stores(id) on delete cascade on update cascade
 );

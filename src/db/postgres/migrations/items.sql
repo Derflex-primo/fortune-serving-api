@@ -1,15 +1,16 @@
 CREATE TABLE items (
-    id INTEGER PRIMARY KEY,
-    store_id INTEGER NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
-    stock INTEGER DEFAULT 0,
-    sku VARCHAR(255) UNIQUE NOT NULL,
-    is_active BOOLEAN DEFAULT TRUE,
-    category_id INTEGER NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    id            int primary key,
+    store_id      int not null,
+    name          varchar(255) not null,
+    description   varchar(500),
+    price         money not null,
+    stock         int default 0,
+    sku           varchar(255) unique not null,
+    is_active     boolean default true,
+    category_id   int not null,
+    created_at    timestamp default current_timestamp,
+    updated_at    timestamp default current_timestamp on update current_timestamp,
+
+    foreign key (store_id) references stores(id) on delete cascade,
+    foreign key (category_id) references categories(id)
 );
