@@ -5,8 +5,8 @@
     "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
-    "start": "node ./dist/src.js",
-    "dev": "nodemon src/index.ts",
+    "start": "node ./dist/app.js",
+    "dev": "nodemon src/app.ts",
     "build": "tsc",
     "docker:start": "docker-compose up -d",
     "docker:stop": "docker-compose down",
