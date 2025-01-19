@@ -1,0 +1,57 @@
+type: object
+required:
+  - id
+  - address_type
+  - street_address
+  - city
+  - postal_code
+  - country
+properties:
+  id:
+    type: integer
+    description: "A unique identifier for the address."
+    example: 401
+  user_id:
+    type: integer
+    description: "The ID of the user associated with the address. Null if associated with a store."
+    example: 42
+  store_id:
+    type: integer
+    description: "The ID of the store associated with the address. Null if associated with a user."
+    example: 201
+  address_type:
+    type: string
+    enum:
+      - home
+      - work
+      - billing
+      - shipping
+      - store
+    description: "The type of address."
+    example: "home"
+  street_address:
+    type: string
+    description: "The street address."
+    example: "123 Tech Street"
+  city:
+    type: string
+    description: "The city for the address."
+    example: "San Francisco"
+  postal_code:
+    type: string
+    description: "The postal code for the address."
+    example: "94103"
+  country:
+    type: string
+    description: "The country for the address."
+    example: "United States"
+  created_at:
+    type: string
+    format: date-time
+    description: "The date and time when the address record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T10:00:00"
+  updated_at:
+    type: string
+    format: date-time
+    description: "The date and time when the address record was last updated, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T11:00:00"

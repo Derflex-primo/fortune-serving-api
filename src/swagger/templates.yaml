@@ -1,0 +1,66 @@
+type: object
+required:
+  - id
+  - name
+  - description
+  - created_by
+properties:
+  id:
+    type: integer
+    description: "A unique identifier for the template."
+    example: 101
+  name:
+    type: string
+    description: "The name of the template."
+    example: "Modern Portfolio"
+  description:
+    type: string
+    description: "A brief description of the template."
+    example: "A clean and modern portfolio template."
+  version:
+    type: string
+    description: "The version of the template."
+    example: "1.0"
+  thumbnail_image:
+    type: string
+    format: uri
+    description: "The URL of the template's thumbnail image."
+    example: "https://daryldeogracias.com/_next/image?url=%2Fdaryl_deogracias.jpeg&w=3840&q=100"
+  is_active:
+    type: boolean
+    description: "A boolean flag indicating whether the template is active."
+    example: true
+  template_type:
+    type: string
+    enum:
+      - ecommerce
+      - blog
+      - portfolio
+      - entertainment
+      - marketing
+      - educational
+      - health and wellness
+      - corporate
+      - real estate
+      - nonprofit
+      - food and beverage
+      - travel
+      - sports and fitness
+      - technology
+      - other
+    description: "The type of the template, based on its use case."
+    example: "portfolio"
+  created_by:
+    type: integer
+    description: "The ID of the user who created the template."
+    example: 12
+  created_at:
+    type: string
+    format: date-time
+    description: "The date and time when the template record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T10:00:00"
+  updated_at:
+    type: string
+    format: date-time
+    description: "The date and time when the template record was last updated, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T11:00:00"

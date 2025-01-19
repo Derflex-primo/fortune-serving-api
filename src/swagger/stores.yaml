@@ -1,0 +1,96 @@
+type: object
+required:
+  - id
+  - name
+  - description
+  - phone_number
+  - email
+  - user_id
+  - template_id
+properties:
+  id:
+    type: integer
+    description: "A unique identifier for the store."
+    example: 201
+  name:
+    type: string
+    description: "The name of the store."
+    example: "Tech World"
+  description:
+    type: string
+    description: "A brief description of the store."
+    example: "An online store for the latest gadgets and electronics."
+  phone_number:
+    type: string
+    description: "The store's contact phone number, including the country code."
+    example: "+639123456789"
+  email:
+    type: string
+    format: email
+    description: "The store's contact email address."
+    example: "support@techworld.com"
+  logo_image:
+    type: string
+    format: uri
+    description: "The URL of the store's logo image."
+    example: "https://daryldeogracias.com/_next/image?url=%2Fdaryl_deogracias.jpeg&w=3840&q=100"
+  favicon_image:
+    type: string
+    format: uri
+    description: "The URL of the store's favicon image."
+    example: "https://daryldeogracias.com/_next/image?url=%2Fdaryl_deogracias.jpeg&w=3840&q=100"
+  meta_title:
+    type: string
+    description: "The meta title for the store, used for SEO."
+    example: "Tech World - Your One-Stop Gadget Store"
+  meta_description:
+    type: string
+    description: "The meta description for the store, used for SEO."
+    example: "Discover the latest gadgets and electronics at Tech World. Shop now for great deals!"
+  user_id:
+    type: integer
+    description: "The ID of the user who owns the store."
+    example: 42
+  template_id:
+    type: integer
+    description: "The ID of the template used by the store."
+    example: 101
+  industry:
+    type: string
+    enum:
+      - ecommerce
+      - technology
+      - fashion
+      - health and wellness
+      - education
+      - food and beverage
+      - travel and tourism
+      - real estate
+      - entertainment
+      - automotive
+      - finance
+      - legal services
+      - manufacturing
+      - agriculture
+      - nonprofit and charity
+      - sports and recreation
+      - media and publishing
+      - home services
+      - beauty and personal care
+      - marketing and advertising
+      - retail
+      - logistics and supply chain
+      - energy and utilities
+      - other
+    description: "The industry category the store belongs to."
+    example: "ecommerce"
+  created_at:
+    type: string
+    format: date-time
+    description: "The date and time when the store record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T10:00:00"
+  updated_at:
+    type: string
+    format: date-time
+    description: "The date and time when the store record was last updated, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T11:00:00"

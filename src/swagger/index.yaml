@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: fortune serving api
-  description: fortune serving -- service main engine, crafted by [Daryl Deogracias](https://daryldeogracias.com/).
+  description: API portfolio, documented by [Daryl Deogracias](https://daryldeogracias.com/).
   version: 1.0.0
 
 # servers:
@@ -16,3 +16,13 @@ components:
   schemas:
     users:
       $ref: "./users.yaml"
+    templates: 
+      $ref: "./templates.yaml"
+    stores:
+      $ref: "./stores.yaml"
+    categories:
+      $ref: "./categories.yaml"
+    addresses: 
+      $ref: "./addresses.yaml"
+    items:
+      $ref: "./items.yaml"

@@ -1,0 +1,56 @@
+type: object
+required:
+  - id
+  - store_id
+  - name
+  - price
+  - sku
+  - category_id
+properties:
+  id:
+    type: integer
+    description: "A unique identifier for the item."
+    example: 501
+  store_id:
+    type: integer
+    description: "The ID of the store that the item belongs to."
+    example: 201
+  name:
+    type: string
+    description: "The name of the item."
+    example: "Wireless Headphones"
+  description:
+    type: string
+    description: "A brief description of the item."
+    example: "High-quality wireless headphones with noise-canceling features."
+  price:
+    type: number
+    format: float
+    description: "The price of the item."
+    example: 99.99
+  stock:
+    type: integer
+    description: "The available stock quantity for the item. Defaults to 0."
+    example: 50
+  sku:
+    type: string
+    description: "The unique Stock Keeping Unit (SKU) for the item."
+    example: "WH-1000XM4-BLK"
+  is_active:
+    type: boolean
+    description: "A boolean flag indicating whether the item is active. Defaults to true."
+    example: true
+  category_id:
+    type: integer
+    description: "The ID of the category that the item belongs to."
+    example: 301
+  created_at:
+    type: string
+    format: date-time
+    description: "The date and time when the item record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T10:00:00"
+  updated_at:
+    type: string
+    format: date-time
+    description: "The date and time when the item record was last updated, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T11:00:00"
