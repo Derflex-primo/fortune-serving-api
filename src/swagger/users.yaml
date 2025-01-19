@@ -1,0 +1,102 @@
+type: object
+required:
+  - id
+  - full_name
+  - email
+  - phone_number
+  - password_hash
+  - date_of_birth
+  - role
+properties:
+  id:
+    type: integer
+    description: "A unique identifier for the user."
+    example: 2927490
+  full_name:
+    type: string
+    description: "User's full name."
+    example: "Derflex D. Primo"
+  phone_number:
+    type: string
+    description: "User's phone number."
+    example: "+63639267165733"
+  email:
+    type: string
+    format: email
+    description: "User's email address."
+    example: "derflex.primo@example.com"
+  password_hash:
+    type: string
+    description: "User's password in hashed form."
+    example: "5d41402abc4b2a76b9719d1017c592"
+  date_of_birth:
+    type: string
+    format: date
+    description: "User's birthdate in the format (e.g., 'YYYY-MM-DD')"
+    example: "1990-05-15"
+  profile_image:
+    type: string
+    format: uri
+    description: "User's profile image link."
+    example: "https://daryldeogracias.com/_next/image?url=%2Fdaryl_deogracias.jpeg&w=3840&q=100"
+  role:
+    type: string
+    enum:
+      - user
+      - admin
+    description: "User's role."
+    example: "user"
+  is_verified:
+    type: boolean
+    description: "A boolean flag to determine if the user is verified or not."
+    example: false
+  status:
+    type: string
+    enum:
+      - active
+      - inactive
+      - banned
+    description: "User's account status."
+    example: "active"
+  last_login:
+    type: string
+    format: date-time
+    description: "The date and time of the user's last login in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T15:30:00"
+  last_logout:
+    type: string
+    format: date-time
+    description: "The date and time of the user's last logout in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T15:45:00"
+  session_token:
+    type: string
+    description: "User's session token."
+    example: "029bf415726b4d24901c893739b105fc"
+  subscription_type:
+    type: string
+    enum:
+      - free
+      - standard
+      - premium
+    description: "User's account subscription type"
+    example: "free"
+  terms_accepted_at:
+    type: string
+    format: date-time
+    description: "The date and time when the user accepted the terms and conditions in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T10:00:00"
+  privacy_policy_accepted_at:
+    type: string
+    format: date-time
+    description: "The date and time when the user accepted the privacy policy in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T10:05:00"
+  created_at:
+    type: string
+    format: date-time
+    description: "The date and time when the record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T10:00:00"
+  updated_at:
+    type: string
+    format: date-time
+    description: "The date and time when the record was last updated, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss')."
+    example: "2025-01-19T11:00:00"

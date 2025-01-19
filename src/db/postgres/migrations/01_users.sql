@@ -1,3 +1,4 @@
+CREATE TYPE role as enum('user', 'admin')
 CREATE TYPE status as enum('active', 'inactive', 'banned');
 CREATE TYPE subscription_type as enum('free', 'standard', 'premium');
 
@@ -9,7 +10,7 @@ CREATE TABLE users (
     password_hash                varchar(255) not null,
     date_of_birth                date not null,
     profile_image                varchar(255),
-    role                         varchar(10) not null check (role in ('users', 'admin')),
+    role                         role default 'user',
     is_verified                  boolean default false,
     status                       status default 'active',
     last_login                   timestamp,
