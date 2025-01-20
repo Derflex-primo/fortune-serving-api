@@ -1,6 +1,7 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { UserRegistration } from "../types";
+import insert_user from "../db/postgres/queries/insert_user";
 
 export default class ServiceUser {
     private secret_key: string
@@ -59,9 +60,11 @@ export default class ServiceUser {
      * @returns 
      */
     public async register(user: UserRegistration): Promise<any> {
-        return {
-            message: "User created successfully!",
-            data: user,
-        };
+        try {
+            const password_hash = await this.hash_password(user.password)
+            const registered_user = await insert_user({ ...user, password_hash })
+        } catch (error) {
+
+        }
     }
 }
