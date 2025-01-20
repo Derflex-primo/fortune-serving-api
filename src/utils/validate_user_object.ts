@@ -1,11 +1,11 @@
-import { User } from "../@types";
+import { UserRegistration } from "../types";
 
 type Validation = {
     valid: boolean;
-    message?: string;
+    message: string;
 }
 
-export default function validateUserObject(user: Partial<User>): Validation {
+export default function validate_user_object(user: Partial<UserRegistration>): Validation {
 
     if (!user.full_name || typeof user.full_name !== "string" || user.full_name.trim().length === 0) {
         return {

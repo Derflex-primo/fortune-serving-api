@@ -1,8 +1,11 @@
-export default class User {
-    public async register_user(users: any): Promise<any> {
+import { UserRegistration } from "../types";
+
+export default class ServiceUser {
+
+    public async register(user: UserRegistration): Promise<any> {
         return {
             message: "User created successfully!",
-            data: users,
+            data: user,
         };
     }
 }
