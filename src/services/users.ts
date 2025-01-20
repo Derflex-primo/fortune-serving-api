@@ -1,4 +1,4 @@
-export class User {
+export default class User {
     public async register_user(users: any): Promise<any> {
         return {
             message: "User created successfully!",

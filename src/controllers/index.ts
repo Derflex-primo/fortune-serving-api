@@ -1,1 +1,1 @@
-export { handle_user_registration } from './users';
+export { default as handle_user_registration } from './users';

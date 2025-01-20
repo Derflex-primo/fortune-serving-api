@@ -1,0 +1,1 @@
+export { default as validate_user_registration } from './validate_user_registration';

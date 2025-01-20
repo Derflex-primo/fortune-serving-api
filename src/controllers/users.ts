@@ -3,7 +3,7 @@ import { User } from "../services";
 
 const service_user = new User;
 
-export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
+export default async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
     const { user } = req.body;
 
     try {
