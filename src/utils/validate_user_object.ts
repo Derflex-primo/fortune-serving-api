@@ -49,5 +49,22 @@ export default function validate_user_object(user: Partial<UserRegistration>): V
         };
     }
 
+    if (user.addresses) {
+        for (const address of user.addresses) {
+            if (!address.street_address || typeof address.street_address !== "string") {
+                return { valid: false, message: "Each address must include a valid street address." };
+            }
+            if (!address.city || typeof address.city !== "string") {
+                return { valid: false, message: "Each address must include a valid city." };
+            }
+            if (!address.postal_code || typeof address.postal_code !== "string") {
+                return { valid: false, message: "Each address must include a valid postal code." };
+            }
+            if (!address.country || typeof address.country !== "string") {
+                return { valid: false, message: "Each address must include a valid country." };
+            }
+        }
+    }
+
     return { valid: true, message: "ok" };
 }
