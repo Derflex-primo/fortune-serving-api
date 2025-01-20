@@ -28,10 +28,10 @@ export default function validate_user_object(user: Partial<UserRegistration>): V
         };
     }
 
-    if (!user.password_hash || typeof user.password_hash !== "string") {
+    if (!user.password || typeof user.password !== "string") {
         return {
             valid: false,
-            message: "Password hash is required and must be a string."
+            message: "Password is required and must be a string."
         };
     }
 

@@ -18,9 +18,13 @@ export type User = {
      */
     email: string;
     /**
+     * User's password in plain text form.
+     */
+    password: string;
+    /**
      * User's password in hashed form.
      */
-    password_hash: string;
+    password_hash?: string;
     /**
      * User's birthdate in the format (e.g., 'YYYY-MM-DD')
      */

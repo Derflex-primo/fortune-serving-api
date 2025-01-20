@@ -4,7 +4,7 @@ required:
   - full_name
   - email
   - phone_number
-  - password_hash
+  - password
   - date_of_birth
   - role
 properties:
@@ -25,6 +25,10 @@ properties:
     format: email
     description: "User's email address."
     example: "derflex.primo@example.com"
+  password:
+    type: string
+    description: "User's password in plain text form."
+    example: "examplepassword213"
   password_hash:
     type: string
     description: "User's password in hashed form."

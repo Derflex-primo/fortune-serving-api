@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "argon2": "^0.41.1",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1",
     "swagger-ui-express": "^5.0.1"
   },
@@ -11,7 +13,7 @@
     "docker:start": "docker-compose up -d",
     "docker:stop": "docker-compose down",
     "docker:restart": "npm run docker:stop && npm run docker:start",
-    "generate:types":  "openapi-ts",
+    "generate:types": "openapi-ts",
     "swagger:bundle": "swagger-cli bundle ./src/swagger/index.yaml --outfile ./src/swagger/output/bundled.yaml --type yaml"
   },
   "devDependencies": {
