@@ -44,7 +44,7 @@ export default class ServiceUser {
     * @param hash - The stored password hash.
     * @returns True if the password matches, false otherwise.
     */
-    public async verifyPassword(password: string, hash: string): Promise<boolean> {
+    public async verify_password(password: string, hash: string): Promise<boolean> {
         try {
             return await argon2.verify(hash, password);
         } catch (error) {
