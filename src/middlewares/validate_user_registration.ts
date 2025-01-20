@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../@types";
+import { User } from "../@codegen";
 import { validate_user_object } from "../utils";
 
 export default function validate_user_registration(req: Request, res: Response, next: NextFunction) {
