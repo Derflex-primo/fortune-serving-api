@@ -3,13 +3,13 @@ import { User } from "../services";
 
 const service_user = new User;
 
-export async function post_user(req: Request, res: Response, next: NextFunction) {
+export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
     const { user } = req.body;
 
     try {
-        const successful_created_user = await service_user.create_user(user);
+        const successful_registered_user = await service_user.register_user(user);
         res.status(201).json({
-            message: `Welcome ${successful_created_user}!`
+            message: `Welcome ${successful_registered_user}!`
         })
     } catch (error) {
         console.error(error)

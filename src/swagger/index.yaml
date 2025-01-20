@@ -14,15 +14,15 @@ paths:
 
 components:
   schemas:
-    users:
-      $ref: "./users.yaml"
-    templates: 
-      $ref: "./templates.yaml"
-    stores:
-      $ref: "./stores.yaml"
-    categories:
-      $ref: "./categories.yaml"
-    addresses: 
-      $ref: "./addresses.yaml"
-    items:
-      $ref: "./items.yaml"
+    user:
+      $ref: "./user.yaml"
+    template: 
+      $ref: "./template.yaml"
+    store:
+      $ref: "./store.yaml"
+    category:
+      $ref: "./category.yaml"
+    address: 
+      $ref: "./address.yaml"
+    item:
+      $ref: "./item.yaml"

@@ -1,1 +1,1 @@
-export { post_user } from './users';
+export { handle_user_registration } from './users';
