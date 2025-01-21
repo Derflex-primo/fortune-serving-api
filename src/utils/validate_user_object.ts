@@ -7,6 +7,13 @@ type Validation = {
 
 export default function validate_user_object(user: Partial<UserRegistration>): Validation {
 
+    if (!user) {
+        return {
+            valid: false,
+            message: "User object is required."
+        };
+    }
+
     if (!user.full_name || typeof user.full_name !== "string" || user.full_name.trim().length === 0) {
         return {
             valid: false,
@@ -49,20 +56,20 @@ export default function validate_user_object(user: Partial<UserRegistration>): V
         };
     }
 
-    if (!user.privacy_policy_accepted_at || typeof user.privacy_policy_accepted_at !== 'boolean') {
+    if (!user.privacy_policy_accepted_at || isNaN(Date.parse(user.privacy_policy_accepted_at))) {
         return {
             valid: false,
-            message: "Privacy policy must be accpeted"
+            message: "Privacy policy must be accepted with a valid timestamp."
         };
     }
-
-    if (!user.terms_accepted_at || typeof user.terms_accepted_at !== 'boolean') {
+    
+    if (!user.terms_accepted_at || isNaN(Date.parse(user.terms_accepted_at))) {
         return {
             valid: false,
-            message: "Terms policy must be accpeted"
+            message: "Terms policy must be accepted with a valid timestamp."
         };
     }
-
+    
     if (user.addresses) {
         for (const address of user.addresses) {
             if (!address.street_address || typeof address.street_address !== "string") {

@@ -17,7 +17,7 @@ CREATE TYPE template_type as enum (
 );
 
 CREATE TABLE templates (
-        id                 int primary key,
+        id                 serial primary key,
         name               varchar(255) not null,
         description        varchar(255) not null,
         version            varchar(10),

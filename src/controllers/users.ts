@@ -10,7 +10,8 @@ export default async function handle_user_registration(req: Request, res: Respon
     try {
         const successful_registered_user = await service.register(user);
         res.status(201).json({
-            message: `Welcome ${successful_registered_user}!`
+            message: "User registered successfully.",
+            user: successful_registered_user
         })
     } catch (error) {
         console.error(error)

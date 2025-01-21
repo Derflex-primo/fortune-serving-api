@@ -7,7 +7,7 @@ CREATE TYPE address_type as enum(
 );
 
 CREATE TABLE addresses (
-    id               int primary key,
+    id               serial primary key,
     user_id          int,
     store_id         int,
     address_type     address_type default 'home',

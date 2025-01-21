@@ -1,0 +1,1 @@
+export { default as register_user_with_addreses } from './register_user_with_addreses';

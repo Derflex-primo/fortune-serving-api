@@ -1,5 +1,5 @@
 CREATE TABLE categories (
-    id            int primary key,
+    id            serial primary key,
     name          varchar(255) unique not null,
     description   varchar(500),
     user_id       int not null,

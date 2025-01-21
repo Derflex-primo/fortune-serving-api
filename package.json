@@ -17,6 +17,7 @@
     "swagger:bundle": "swagger-cli bundle ./src/swagger/index.yaml --outfile ./src/swagger/output/bundled.yaml --type yaml"
   },
   "devDependencies": {
+    "@hey-api/client-fetch": "^0.7.1",
     "@hey-api/openapi-ts": "^0.62.1",
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",

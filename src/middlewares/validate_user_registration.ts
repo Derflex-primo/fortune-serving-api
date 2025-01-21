@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../@codegen";
+import { UserRegistration } from "../types";
 import { validate_user_object } from "../utils";
 
 export default function validate_user_registration(req: Request, res: Response, next: NextFunction) {
-    const { user }: { user: Partial<User> } = req.body;
+    const { user }: { user: Partial<UserRegistration> } = req.body;
 
     try {
         const validation = validate_user_object(user)

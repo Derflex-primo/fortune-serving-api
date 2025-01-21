@@ -1,9 +1,9 @@
-CREATE TYPE role as enum('user', 'admin')
+CREATE TYPE role as enum('user', 'admin');
 CREATE TYPE status as enum('active', 'inactive', 'banned');
 CREATE TYPE subscription_type as enum('free', 'standard', 'premium');
 
 CREATE TABLE users (
-    id                           int primary key,
+    id                           serial primary key,
     full_name                    varchar(255) not null,
     phone_number                 varchar(30) unique not null,
     email                        varchar(255) unique not null,

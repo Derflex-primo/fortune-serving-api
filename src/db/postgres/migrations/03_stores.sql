@@ -26,7 +26,7 @@ CREATE TYPE industry as enum (
 );
 
 CREATE TABLE stores (
-        id                 int primary key,
+        id                 serial primary key,
         name               varchar(255) unique not null,
         description        varchar(255) not null,
         phone_number       varchar(30) unique not null,
