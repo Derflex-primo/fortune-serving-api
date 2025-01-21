@@ -97,7 +97,6 @@ export default async function register_user_with_addreses(user: UserRegistration
     };
 
     client.query('COMMIT');
-    console.log(`${user_data.rows[0].full_name} has been registered successfully! ✅`)
 
     return { ...user_data.rows[0], addresses }
   } catch (error) {
