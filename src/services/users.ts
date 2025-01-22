@@ -74,7 +74,7 @@ export default class ServiceUser {
 
     /**
      * Returns all the users in paginated way.
-     * @param get - The pagination query for cursor or keyset keyset pagination.
+     * @param pagination - The pagination query for cursor or keyset keyset pagination.
      * @returns A set of rows 
      */
     public async get_all_users(pagination: Partial<Pagination>) {
