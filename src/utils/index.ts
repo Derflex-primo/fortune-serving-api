@@ -1,1 +1,1 @@
-export { default as validate_user_object } from './validate_user_object';
+export { default as validate_user_object } from "./validate_user_object";

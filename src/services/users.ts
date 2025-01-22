@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import { UserRegistration } from "../types";
+import { Pagination, UserRegistration } from "../types";
 import { register_user_with_addreses } from "../db/postgres/queries";
 import { Address, User } from "../@codegen";
 
@@ -56,9 +56,9 @@ export default class ServiceUser {
     }
 
     /**
-     * Register user in users table.
-     * @param user 
-     * @returns 
+     * Registers a user in the users table along with their addresses.
+     * @param user - The user registration object containing user details.
+     * @returns The registered user object, excluding password and password_hash, and including addresses, or undefined if an error occurs.
      */
     public async register(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | undefined> {
         try {
@@ -70,5 +70,14 @@ export default class ServiceUser {
             console.error("Error registering user", error);
             return undefined;
         }
+    }
+
+    /**
+     * Returns all the users in paginated way.
+     * @param get - The pagination query for cursor or keyset keyset pagination.
+     * @returns A set of rows 
+     */
+    public async get_all_users(pagination: Partial<Pagination>) {
+        return []
     }
 }

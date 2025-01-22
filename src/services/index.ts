@@ -1,1 +1,1 @@
-export { default as ServiceUser } from './users';
+export { default as ServiceUser } from "./users";
