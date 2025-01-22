@@ -10,7 +10,7 @@ export default function validate_user_access_control(access_control: User['role'
                 next();
                 return;
             }
-            res.send(401).json({ message: "Forbidden, insufficient permissions." });
+            res.status(401).json({ message: "Forbidden, insufficient permissions." });
             return;
         } catch (error) {
             console.error("Error during user access control validation:", error);

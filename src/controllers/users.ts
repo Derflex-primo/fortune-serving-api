@@ -22,6 +22,7 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
                 mesage: "No users found",
                 data: []
             })
+            return;
         }
 
         res.status(200).json({
@@ -29,10 +30,11 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
             message: "Users fetched succesfully",
             data: users
         })
-
+        return;
     } catch (error) {
         console.error(error)
         next(error)
+        return;
     }
 };
 
@@ -46,8 +48,10 @@ export async function handle_user_registration(req: Request, res: Response, next
             message: "User registered successfully.",
             data: successful_registered_user,
         })
+        return;
     } catch (error) {
         console.error(error)
         next(error)
+        return;
     }
 };
