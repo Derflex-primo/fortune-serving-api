@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: fortune serving api
-  description: API portfolio, documented by [Daryl Deogracias](https://daryldeogracias.com/).
+  title: "fortune serving api"
+  description: "API portfolio, documented by [Daryl Deogracias](https://daryldeogracias.com/)."
   version: 1.0.0
 
 # servers:
@@ -11,18 +11,23 @@ info:
 #     description: Optional server description, e.g. Internal staging server for testing
 
 paths:
+  /users:
+    post:
+      tags:
+        - "Users"
+      summary: "Add user"
 
 components:
   schemas:
     user:
       $ref: "./user.yaml"
-    template: 
+    template:
       $ref: "./template.yaml"
     store:
       $ref: "./store.yaml"
     category:
       $ref: "./category.yaml"
-    address: 
+    address:
       $ref: "./address.yaml"
     item:
       $ref: "./item.yaml"
