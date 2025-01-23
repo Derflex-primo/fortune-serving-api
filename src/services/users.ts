@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { Pagination, UserRegistration } from "../types";
-import { register_user_with_addreses } from "../db/postgres/queries";
+import { get_all_users_with_pagination, register_user_with_addreses } from "../db/postgres/queries";
 import { Address, User } from "../@codegen";
 
 export default class ServiceUser {
@@ -74,10 +74,17 @@ export default class ServiceUser {
 
     /**
      * Returns all the users in paginated way.
-     * @param pagination - The pagination query for cursor or keyset keyset pagination.
-     * @returns A set of rows 
+     * @param pagination - The pagination query for cursor or keyset pagination.
+     * @returns A subset of user rows based on the n of limit specified. 
      */
-    public async get_all_users(pagination: Partial<Pagination>) {
-        return []
+    public async get_all_users(pagination: Partial<Pagination>): Promise<(Omit<User, "password" | "password_hash">[] & Pagination) | undefined> {
+        try {
+            const users = await get_all_users_with_pagination(pagination);
+
+            return users;
+        } catch (error) {
+            console.error("Error in returning all users", error)
+            return undefined;
+        }
     }
 }

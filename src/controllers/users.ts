@@ -16,7 +16,7 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
     try {
         const users = await service.get_all_users(pagination)
 
-        if (users.length === 0) {
+        if (users && users.length === 0) {
             res.status(200).json({
                 status: "ok",
                 mesage: "No users found",
