@@ -15,7 +15,10 @@ paths:
     post:
       tags:
         - "Users"
-      summary: "Add user"
+      summary: "Add user."
+    get: 
+      tags: "Users"
+      summary: "Get all users in paginated way."
 
 components:
   schemas:

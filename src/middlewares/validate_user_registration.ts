@@ -9,7 +9,7 @@ export default function validate_user_registration(req: Request, res: Response, 
         const validation = validate_user_object(user)
 
         if (!validation.valid) {
-            res.status(400).json({ message: validation.message })
+            res.status(400).json({ message: validation.message });
             return;
         }
 

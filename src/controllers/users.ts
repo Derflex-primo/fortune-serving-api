@@ -1,20 +1,21 @@
 import type { Request, Response, NextFunction } from "express";
-import { UserRegistration } from "../types";
+import { Pagination, UserRegistration } from "../types";
 import { ServiceUser } from "../services";
 
 const service = new ServiceUser();
 
 export async function handle_get_all_user(req: Request, res: Response, next: NextFunction) {
-    const { limit, next_page, prev_page } = req.query;
+    const { limit, next_page, order }: Partial<Pagination> = req.query;
 
     const pagination = {
-        limit: limit as string | undefined,
-        next_page: next_page as string | undefined,
-        prev_page: prev_page as string | undefined
-    }
+        limit: limit,
+        next_page: next_page,
+        order: order,
+    };
 
     try {
-        const users = await service.get_all_users(pagination)
+        const data = await service.get_all_users(pagination)
+        const users = data && data.users || [];
 
         if (users && users.length === 0) {
             res.status(200).json({
@@ -28,7 +29,7 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
         res.status(200).json({
             status: "ok",
             message: "Users fetched succesfully",
-            data: users
+            data: data
         })
         return;
     } catch (error) {

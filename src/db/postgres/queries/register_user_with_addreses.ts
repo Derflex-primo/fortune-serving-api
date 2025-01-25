@@ -26,7 +26,9 @@ export default async function register_user_with_addreses(user: UserRegistration
             updated_at
           ) VALUES (
               $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
-          ) RETURNING 
+          ) 
+          ON CONFLICT (phone_number, email) DO NOTHING
+          RETURNING 
              id, 
              full_name,
              phone_number,

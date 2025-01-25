@@ -6,6 +6,7 @@ import { Address, User } from "../@codegen";
 
 export default class ServiceUser {
     private secret_key: string
+    private readonly cap_limit: number = 40;
 
     constructor() {
         this.secret_key = process.env.JWT_SECRET_KEY || ''
@@ -60,15 +61,15 @@ export default class ServiceUser {
      * @param user - The user registration object containing user details.
      * @returns The registered user object, excluding password and password_hash, and including addresses, or undefined if an error occurs.
      */
-    public async register(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | undefined> {
+    public async register(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
         try {
             const password_hash = await this.hash_password(user.password)
-            const registered_user = await register_user_with_addreses({ ...user, password_hash })
+            const result = await register_user_with_addreses({ ...user, password_hash })
 
-            return registered_user;
+            return result;
         } catch (error) {
             console.error("Error registering user", error);
-            return undefined;
+            return null;
         }
     }
 
@@ -77,14 +78,32 @@ export default class ServiceUser {
      * @param pagination - The pagination query for cursor or keyset pagination.
      * @returns A subset of user rows based on the n of limit specified. 
      */
-    public async get_all_users(pagination: Partial<Pagination>): Promise<(Omit<User, "password" | "password_hash">[] & Pagination) | undefined> {
+    public async get_all_users(pagination: Partial<Pagination>): Promise<{ users: Omit<User, "password" | "password_hash">[], pagination: Pagination } | null> {
         try {
-            const users = await get_all_users_with_pagination(pagination);
+            const limit = pagination.limit || this.cap_limit;
+            const order = pagination.order ? pagination.order.toUpperCase() : "ASC";
+            const next_page = pagination.next_page || "0";
 
-            return users;
+            const result = await get_all_users_with_pagination({ limit, order, next_page });
+
+            let cursor_next_page: string | null = null;
+
+            if (result.length > limit) {
+                cursor_next_page = result[limit].id.toString() || null;
+                result.splice(limit);
+            };
+
+            return {
+                users: result,
+                pagination: {
+                    limit: limit,
+                    order: order,
+                    next_page: cursor_next_page
+                }
+            };
         } catch (error) {
             console.error("Error in returning all users", error)
-            return undefined;
+            return null;
         }
     }
 }

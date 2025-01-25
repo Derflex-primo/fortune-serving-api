@@ -5,7 +5,7 @@ export type UserRegistration = Pick<User, 'full_name' | 'email' | 'phone_number'
 };
 
 export type Pagination = {
-    limit?: string,
-    next_page?: string,
-    prev_page?: string
+    limit?: number | null,
+    order?: string | null
+    next_page?: string | null,
 }

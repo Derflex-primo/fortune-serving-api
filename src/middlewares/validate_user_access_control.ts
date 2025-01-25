@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { User } from "../@codegen";
 
+// should be auth api key
 export default function validate_user_access_control(access_control: User['role'][]) {
     return async function (req: Request, res: Response, next: NextFunction) {
         const { user }: { user: Partial<User> } = req.body;
