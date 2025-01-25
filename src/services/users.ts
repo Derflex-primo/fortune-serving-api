@@ -1,18 +1,18 @@
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import { ServiceProtection } from "./index";
 import { Pagination, UserRegistration } from "../types";
 import { get_all_users_with_pagination, register_user_with_addreses } from "../db/postgres/queries";
 import { Address, User } from "../@codegen";
+import ServiceProtection from "./protection";
 
 export default class ServiceUser {
     private readonly secret_key: string;
     private readonly cap_limit: number = 40;
-    private readonly protection: ServiceProtection
+    private readonly protection: ServiceProtection;
 
     constructor() {
         this.secret_key = process.env.JWT_SECRET_KEY || "";
-        this.protection = new ServiceProtection();
+        this.protection = new ServiceProtection;
     }
 
     /**
@@ -85,10 +85,9 @@ export default class ServiceUser {
         try {
             const limit = pagination.limit || this.cap_limit;
             const order = pagination.order ? pagination.order.toUpperCase() : "ASC";
-            const next_page = await this.protection.decrypt(pagination.next_page || await this.protection.encrypt(0));
+            const next_page = pagination.next_page ? this.protection.decrypt(pagination.next_page) : "0";
 
             const result = await get_all_users_with_pagination({ limit, order, next_page });
-            console.log("DECRYPTED SUCCESSFULLY 🔴", next_page);
 
             let cursor_next_page: string | null = null;
 
@@ -97,9 +96,8 @@ export default class ServiceUser {
                 result.splice(limit);
             };
 
-            const encypted_cursor_next_page = await this.protection.encrypt(parseInt(cursor_next_page as string));
-            console.log("ENCRYPTED SUCCESSFULLY ✅", encypted_cursor_next_page);
-            
+            const encypted_cursor_next_page = this.protection.encrypt(parseInt(cursor_next_page as string));
+
             return {
                 users: result,
                 pagination: {
