@@ -17,7 +17,8 @@ paths:
         - "Users"
       summary: "Add user."
     get: 
-      tags: "Users"
+      tags: 
+        - "Users"
       summary: "Get all users in paginated way."
 
 components:

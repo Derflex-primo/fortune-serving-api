@@ -34,10 +34,10 @@ export default async function validate_pagination_query(req: Request, res: Respo
         };
 
         if (next_page !== undefined && next_page !== null) {
-            if (isNaN(Number(next_page))) {
+            if (!isNaN(Number(next_page))) {
                 res.status(400).json({
                     valid: false,
-                    message: "'next_page' must be a valid number.",
+                    message: "'next_page' not encrypted value.",
                 });
                 return;
             };
