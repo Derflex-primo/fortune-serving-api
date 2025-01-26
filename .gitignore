@@ -3,3 +3,9 @@ node_modules
 src/swagger/output
 src/@types
 .env
+
+# playwright
+/playwright-report/
+/playwright-results/
+/blob-report/
+/playwright/.cache/
