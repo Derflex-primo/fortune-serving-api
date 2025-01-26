@@ -40,7 +40,7 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
 };
 
 export async function handle_get_user(req: Request, res: Response, next: NextFunction) {
-    const { id }: { id: string } = req.body;
+    const { id } = req.params;
 
     try {
         const data = await service.get_user(id);

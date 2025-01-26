@@ -9,16 +9,17 @@ export default async function get_all_users_with_pagination(pagination: Paginati
     try {
 
         const query = `
-              SELECT id, 
-                     full_name, 
-                     phone_number, 
-                     email, 
-                     date_of_birth, 
-                     role, 
-                     is_verified, 
-                     status,
-                     subscription_type,
-                     profile_image
+              SELECT 
+                  id, 
+                  full_name, 
+                  phone_number, 
+                  email, 
+                  date_of_birth, 
+                  role, 
+                  is_verified, 
+                  status,
+                  subscription_type,
+                  profile_image
               FROM users
               ${next_page ? "WHERE id >= $1::uuid" : ""}
               ORDER BY id ${order}
@@ -31,7 +32,7 @@ export default async function get_all_users_with_pagination(pagination: Paginati
         return results.rows
     } catch (error) {
 
-        console.error("Transaction failed:", error);
+        console.error("Transaction failed: get_all_users_with_pagination", error);
         throw error;
 
     } finally {

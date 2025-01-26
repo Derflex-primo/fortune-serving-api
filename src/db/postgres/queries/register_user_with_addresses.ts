@@ -104,7 +104,7 @@ export default async function register_user_with_addresses(user: UserRegistratio
   } catch (error) {
 
     await client.query("ROLLBACK");
-    console.error("Transaction failed:", error);
+    console.error("Transaction failed: register_user_with_addresses", error);
     throw error;
 
   } finally {

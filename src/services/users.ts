@@ -1,7 +1,7 @@
 import { Address, User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
-import { get_all_users_with_pagination, register_user_with_addresses } from "../db/postgres/queries";
+import { get_all_users_with_pagination, get_user_with_addresses, register_user_with_addresses } from "../db/postgres/queries";
 
 export default class ServiceUser {
     private readonly cap_limit: number = 40;
@@ -69,11 +69,14 @@ export default class ServiceUser {
      * @param id - uuid format to be used to fetch user.
      * @returns User details.
      */
-    public async get_user(id: string): Promise<void | undefined> {
+    public async get_user(id: string): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
         try {
-          
-        } catch (error) {
+            const result = await get_user_with_addresses(id);
 
+            return result;
+        } catch (error) {
+            console.error("Error in returning user", error)
+            return null;
         }
     }
 }
