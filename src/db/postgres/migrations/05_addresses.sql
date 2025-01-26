@@ -7,14 +7,14 @@ CREATE TYPE address_type as enum(
 );
 
 CREATE TABLE addresses (
-    id               serial primary key,
-    user_id          int,
-    store_id         int,
+    id               uuid primary key default uuid_generate_v4(),
     address_type     address_type default 'home',
     street_address   varchar(255) not null,
     city             varchar(100) not null,
     postal_code      varchar(10) not null,
     country          varchar(100) not null,
+    user_id          uuid,
+    store_id         uuid,
     created_at       timestamp default current_timestamp,
     updated_at       timestamp default current_timestamp,
 

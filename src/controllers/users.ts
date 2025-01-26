@@ -40,18 +40,42 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
 };
 
 export async function handle_get_user(req: Request, res: Response, next: NextFunction) {
+    const { id }: { id: string } = req.body;
 
+    try {
+        const data = await service.get_user(id);
+        if (!data) {
+            res.status(400).json({
+                status: "failed",
+                message: "User does not exist",
+                data: null
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User fetched succesfully",
+            data: data
+        })
+        next()
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
 }
 
 export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
     const { user }: { user: UserRegistration } = req.body;
 
     try {
-        const successful_registered_user = await service.register(user);
+        const data = await service.register(user);
         res.status(201).json({
             status: "ok",
             message: "User registered successfully.",
-            data: successful_registered_user,
+            data: data,
         })
         return;
     } catch (error) {

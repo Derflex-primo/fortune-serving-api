@@ -9,9 +9,10 @@ required:
   - template_id
 properties:
   id:
-    type: integer
+    type: string
+    format: uuid
     description: "A unique identifier for the store."
-    example: 201
+    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   name:
     type: string
     description: "The name of the store."
@@ -48,13 +49,14 @@ properties:
     description: "The meta description for the store, used for SEO."
     example: "Discover the latest gadgets and electronics at Tech World. Shop now for great deals!"
   user_id:
-    type: integer
-    description: "The ID of the user who owns the store."
-    example: 42
+    type: string
+    format: uuid
+    description: "The unique identifier of the user who created the store."
+    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   template_id:
-    type: integer
-    description: "The ID of the template used by the store."
-    example: 101
+    type: string
+    description: "The unique identifier of the template used by the store."
+    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   industry:
     type: string
     enum:

@@ -26,7 +26,7 @@ CREATE TYPE industry as enum (
 );
 
 CREATE TABLE stores (
-        id                 serial primary key,
+        id                 uuid primary key default uuid_generate_v4(),
         name               varchar(255) unique not null,
         description        varchar(255) not null,
         phone_number       varchar(30) unique not null,
@@ -35,9 +35,9 @@ CREATE TABLE stores (
         favicon_image      varchar(255),
         meta_title         varchar(255),
         meta_description   varchar(500),
-        user_id            int not null,
-        template_id        int not null,
         industry           industry default 'other',
+        user_id            uuid not null,
+        template_id        uuid not null,
         created_at         timestamp default current_timestamp,
         updated_at         timestamp default current_timestamp,
 

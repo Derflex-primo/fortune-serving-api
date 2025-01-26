@@ -9,9 +9,10 @@ required:
   - role
 properties:
   id:
-    type: integer
+    type: string
+    format: uuid
     description: "A unique identifier for the user."
-    example: 2927490
+    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   full_name:
     type: string
     description: "User's full name."

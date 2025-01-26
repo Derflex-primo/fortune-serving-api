@@ -37,18 +37,18 @@ export default class ServiceUser {
         try {
             const limit = pagination.limit || this.cap_limit;
             const order = pagination.order ? pagination.order.toUpperCase() : "ASC";
-            const next_page = pagination.next_page ? this.protection.decrypt(pagination.next_page) : "0";
+            const next_page = pagination.next_page ? this.protection.decrypt(pagination.next_page) : null;
 
             const result = await get_all_users_with_pagination({ limit, order, next_page });
 
             let cursor_next_page: string | null = null;
 
             if (result.length > limit) {
-                cursor_next_page = result[limit].id.toString() || null;
+                cursor_next_page = result[limit].id || null;
                 result.splice(limit);
             };
 
-            const encypted_cursor_next_page = this.protection.encrypt(parseInt(cursor_next_page as string));
+            const encypted_cursor_next_page = this.protection.encrypt(cursor_next_page as string);
 
             return {
                 users: result,
@@ -61,6 +61,12 @@ export default class ServiceUser {
         } catch (error) {
             console.error("Error in returning all users", error)
             return null;
+        }
+    }
+
+    public async get_user(id: string): Promise<void | undefined> {
+        try {
+        } catch (error) {
         }
     }
 }

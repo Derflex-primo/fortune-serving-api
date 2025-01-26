@@ -5,7 +5,7 @@ import { Pagination } from "../../../types";
 export default async function get_all_users_with_pagination(pagination: Pagination): Promise<Omit<User, "password" | "password_hash">[]> {
     const client = await pool.connect();
     const { limit, order, next_page } = pagination;
-
+    
     try {
 
         const query = `
@@ -20,12 +20,12 @@ export default async function get_all_users_with_pagination(pagination: Paginati
                      subscription_type,
                      profile_image
               FROM users
-              WHERE id >= $1
+              ${next_page ? "WHERE id >= $1::uuid" : ""}
               ORDER BY id ${order}
-              LIMIT $2;
+              LIMIT ${next_page ? "$2" : "$1"};
         `;
 
-        const values = [next_page, limit as number + 1];
+        const values =  next_page ? [next_page, limit as number + 1] : [limit as number + 1];
         const results = await client.query(query, values);
 
         return results.rows
