@@ -1,6 +1,7 @@
 import { Address, User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
+import { normalize_response_format_user } from "../utils";
 import { get_all_users_with_pagination, get_user_with_addresses, register_user_with_addresses } from "../db/postgres/queries";
 
 export default class ServiceUser {
@@ -69,11 +70,13 @@ export default class ServiceUser {
      * @param id - uuid format to be used to fetch user.
      * @returns User details.
      */
-    public async get_user(id: string): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
+    public async get_user(id: string): Promise<Omit<User, "password" | "password_hash"> & { addresses: (Address & { address_id: string })[] } | null> {
         try {
             const result = await get_user_with_addresses(id);
+            const user = normalize_response_format_user(result)
 
-            return result;
+            //@ts-ignore
+            return user;
         } catch (error) {
             console.error("Error in returning user", error)
             return null;
