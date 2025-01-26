@@ -1,9 +1,11 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TYPE role as enum('user', 'admin');
 CREATE TYPE status as enum('active', 'inactive', 'banned');
 CREATE TYPE subscription_type as enum('free', 'standard', 'premium');
 
 CREATE TABLE users (
-    id                           serial primary key,
+    id                           uuid primary key default uuid_generate_v4(),
     full_name                    varchar(255) not null,
     phone_number                 varchar(30) unique not null,
     email                        varchar(255) unique not null,
@@ -22,3 +24,5 @@ CREATE TABLE users (
     created_at                   timestamp default current_timestamp,
     updated_at                   timestamp default current_timestamp
 );
+
+ALTER TABLE users ADD CONSTRAINT unique_phone_email UNIQUE (phone_number, email);

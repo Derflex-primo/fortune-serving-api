@@ -4,7 +4,7 @@ export type User = {
     /**
      * A unique identifier for the user.
      */
-    id: number;
+    id: string;
     /**
      * User's full name.
      */
@@ -83,7 +83,7 @@ export type Template = {
     /**
      * A unique identifier for the template.
      */
-    id: number;
+    id: string;
     /**
      * The name of the template.
      */
@@ -109,9 +109,9 @@ export type Template = {
      */
     template_type?: 'ecommerce' | 'blog' | 'portfolio' | 'entertainment' | 'marketing' | 'educational' | 'health and wellness' | 'corporate' | 'real estate' | 'nonprofit' | 'food and beverage' | 'travel' | 'sports and fitness' | 'technology' | 'other';
     /**
-     * The ID of the user who created the template.
+     * The unique identifier of the user who created the template.
      */
-    created_by: number;
+    user_id?: string;
     /**
      * The date and time when the template record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss').
      */
@@ -126,7 +126,7 @@ export type Store = {
     /**
      * A unique identifier for the store.
      */
-    id: number;
+    id: string;
     /**
      * The name of the store.
      */
@@ -160,13 +160,13 @@ export type Store = {
      */
     meta_description?: string;
     /**
-     * The ID of the user who owns the store.
+     * The unique identifier of the user who created the store.
      */
-    user_id: number;
+    user_id: string;
     /**
-     * The ID of the template used by the store.
+     * The unique identifier of the template used by the store.
      */
-    template_id: number;
+    template_id: string;
     /**
      * The industry category the store belongs to.
      */
@@ -185,7 +185,7 @@ export type Category = {
     /**
      * A unique identifier for the category.
      */
-    id: number;
+    id: string;
     /**
      * The name of the category.
      */
@@ -195,9 +195,9 @@ export type Category = {
      */
     description?: string;
     /**
-     * The ID of the user who created the category.
+     * The unique identifier of the user who created the category.
      */
-    user_id: number;
+    user_id: string;
     /**
      * The date and time when the category record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss').
      */
@@ -212,15 +212,15 @@ export type Address = {
     /**
      * A unique identifier for the address.
      */
-    id: number;
+    id: string;
     /**
-     * The ID of the user associated with the address. Null if associated with a store.
+     * The unique identifier of the user associated with the address. Null if associated with a store.
      */
-    user_id?: number;
+    user_id?: string;
     /**
-     * The ID of the store associated with the address. Null if associated with a user.
+     * The unique identifier of the store associated with the address. Null if associated with a user.
      */
-    store_id?: number;
+    store_id?: string;
     /**
      * The type of address.
      */
@@ -255,11 +255,7 @@ export type Item = {
     /**
      * A unique identifier for the item.
      */
-    id: number;
-    /**
-     * The ID of the store that the item belongs to.
-     */
-    store_id: number;
+    id: string;
     /**
      * The name of the item.
      */
@@ -285,9 +281,13 @@ export type Item = {
      */
     is_active?: boolean;
     /**
-     * The ID of the category that the item belongs to.
+     * The unique identifier of the category that the item belongs to.
      */
-    category_id: number;
+    category_id: string;
+    /**
+     * The unique identifier of the store that the item belongs to.
+     */
+    store_id: string;
     /**
      * The date and time when the item record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss').
      */
@@ -296,4 +296,25 @@ export type Item = {
      * The date and time when the item record was last updated, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss').
      */
     updated_at?: string;
+};
+
+export type GetUsersData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users';
+};
+
+export type PostUsersData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users';
+};
+
+export type GetUsersIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/id';
 };

@@ -1,13 +1,13 @@
 CREATE TABLE items (
-    id            serial primary key,
-    store_id      int not null,
+    id            uuid primary key default uuid_generate_v4(),
     name          varchar(255) not null,
     description   varchar(500),
     price         money not null,
     stock         int default 0,
     sku           varchar(255) unique not null,
     is_active     boolean default true,
-    category_id   int not null,
+    store_id      uuid not null,
+    category_id   uuid not null,
     created_at    timestamp default current_timestamp,
     updated_at    timestamp default current_timestamp,
 

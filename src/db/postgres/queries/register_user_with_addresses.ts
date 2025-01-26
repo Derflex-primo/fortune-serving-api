@@ -2,7 +2,7 @@ import pool from "../config";
 import { Address, User } from "../../../@codegen";
 import { UserRegistration } from "../../../types";
 
-export default async function register_user_with_addreses(user: UserRegistration & { password_hash: string }): Promise<User & { addresses: Address[] }> {
+export default async function register_user_with_addresses(user: UserRegistration & { password_hash: string }): Promise<User & { addresses: Address[] }> {
   const client = await pool.connect();
   const current_timestamp = new Date().toISOString();
 
@@ -104,7 +104,7 @@ export default async function register_user_with_addreses(user: UserRegistration
   } catch (error) {
 
     await client.query("ROLLBACK");
-    console.error("Transaction failed:", error);
+    console.error("Transaction failed: register_user_with_addresses", error);
     throw error;
 
   } finally {

@@ -109,6 +109,10 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "exclude": [
-     "openapi-ts.config.ts"
+     "openapi-ts.config.ts",
+     "playwright.config.ts",
+     "__tests__",
+     "playwright-report",
+     "playwright-results"
   ]
 }

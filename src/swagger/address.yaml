@@ -8,17 +8,20 @@ required:
   - country
 properties:
   id:
-    type: integer
+    type: string
+    formar: uuid
     description: "A unique identifier for the address."
-    example: 401
+    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   user_id:
-    type: integer
-    description: "The ID of the user associated with the address. Null if associated with a store."
-    example: 42
+    type: string
+    format: uuid
+    description: "The unique identifier of the user associated with the address. Null if associated with a store."
+    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   store_id:
-    type: integer
-    description: "The ID of the store associated with the address. Null if associated with a user."
-    example: 201
+    type: string
+    formar: uuid
+    description: "The unique identifier of the store associated with the address. Null if associated with a user."
+    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   address_type:
     type: string
     enum:

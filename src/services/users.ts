@@ -1,7 +1,8 @@
 import { Address, User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
-import { get_all_users_with_pagination, register_user_with_addreses } from "../db/postgres/queries";
+import { normalize_response_format_user } from "../utils";
+import { get_all_users_with_pagination, get_user_with_addresses, register_user_with_addresses } from "../db/postgres/queries";
 
 export default class ServiceUser {
     private readonly cap_limit: number = 40;
@@ -19,7 +20,7 @@ export default class ServiceUser {
     public async register(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
         try {
             const password_hash = await this.protection.hash_password(user.password)
-            const result = await register_user_with_addreses({ ...user, password_hash })
+            const result = await register_user_with_addresses({ ...user, password_hash })
 
             return result;
         } catch (error) {
@@ -37,18 +38,18 @@ export default class ServiceUser {
         try {
             const limit = pagination.limit || this.cap_limit;
             const order = pagination.order ? pagination.order.toUpperCase() : "ASC";
-            const next_page = pagination.next_page ? this.protection.decrypt(pagination.next_page) : "0";
+            const next_page = pagination.next_page ? this.protection.decrypt(pagination.next_page) : null;
 
             const result = await get_all_users_with_pagination({ limit, order, next_page });
 
             let cursor_next_page: string | null = null;
 
             if (result.length > limit) {
-                cursor_next_page = result[limit].id.toString() || null;
+                cursor_next_page = result[limit].id || null;
                 result.splice(limit);
             };
 
-            const encypted_cursor_next_page = this.protection.encrypt(parseInt(cursor_next_page as string));
+            const encypted_cursor_next_page = this.protection.encrypt(cursor_next_page as string);
 
             return {
                 users: result,
@@ -60,6 +61,24 @@ export default class ServiceUser {
             };
         } catch (error) {
             console.error("Error in returning all users", error)
+            return null;
+        }
+    }
+
+    /**
+     * Returns user details.
+     * @param id - uuid format to be used to fetch user.
+     * @returns User details.
+     */
+    public async get_user(id: string): Promise<Omit<User, "password" | "password_hash"> & { addresses: (Address & { address_id: string })[] } | null> {
+        try {
+            const result = await get_user_with_addresses(id);
+            const user = normalize_response_format_user(result)
+
+            //@ts-ignore
+            return user;
+        } catch (error) {
+            console.error("Error in returning user", error)
             return null;
         }
     }

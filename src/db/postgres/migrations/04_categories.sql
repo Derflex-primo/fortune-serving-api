@@ -1,8 +1,8 @@
 CREATE TABLE categories (
-    id            serial primary key,
+    id            uuid primary key default uuid_generate_v4(),
     name          varchar(255) unique not null,
     description   varchar(500),
-    user_id       int not null,
+    user_id       uuid not null,
     created_at    timestamp default current_timestamp,
     updated_at    timestamp default current_timestamp,
 

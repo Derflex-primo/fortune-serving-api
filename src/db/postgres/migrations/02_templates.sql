@@ -17,16 +17,16 @@ CREATE TYPE template_type as enum (
 );
 
 CREATE TABLE templates (
-        id                 serial primary key,
+        id                 uuid primary key default uuid_generate_v4(),
         name               varchar(255) not null,
         description        varchar(255) not null,
         version            varchar(10),
         thumbnail_image    text,
         is_active          boolean default true,
         template_type      template_type default 'other',
-        created_by         int not null,
+        user_id            uuid not null,
         created_at         timestamp default current_timestamp,
         updated_at         timestamp default current_timestamp,
 
-        foreign key (created_by) references users(id) on delete cascade on update cascade
+        foreign key (user_id) references users(id) on delete cascade on update cascade
 );
