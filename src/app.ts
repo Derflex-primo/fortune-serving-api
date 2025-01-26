@@ -1,3 +1,4 @@
+require('dotenv').config({path: './src/.env'});
 import express, { Request, Response } from "express";
 import swaggerUi from 'swagger-ui-express';
 import yaml from "yaml";
