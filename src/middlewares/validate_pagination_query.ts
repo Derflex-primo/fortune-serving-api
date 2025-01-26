@@ -37,7 +37,7 @@ export default async function validate_pagination_query(req: Request, res: Respo
             if (!isNaN(Number(next_page))) {
                 res.status(400).json({
                     valid: false,
-                    message: "'next_page' not encrypted value.",
+                    message: "'next_page' is not a valid value.",
                 });
                 return;
             };

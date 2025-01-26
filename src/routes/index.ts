@@ -9,4 +9,6 @@ const router = Router();
 router.get("/users", validate_pagination_query, handle_get_all_user);
 router.post("/users", validate_user_registration, handle_user_registration);
 
+router.get("/users/:id")
+
 export default router;

@@ -28,7 +28,7 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
 
         res.status(200).json({
             status: "ok",
-            message: "Users fetched succesfully",
+            message: "Users fetched succesfully.",
             data: data
         })
         return;
@@ -38,6 +38,10 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
         return;
     }
 };
+
+export async function handle_get_user(req: Request, res: Response, next: NextFunction) {
+
+}
 
 export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
     const { user }: { user: UserRegistration } = req.body;
