@@ -311,3 +311,10 @@ export type PostUsersData = {
     query?: never;
     url: '/users';
 };
+
+export type GetUsersIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/id';
+};

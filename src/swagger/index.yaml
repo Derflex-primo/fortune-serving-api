@@ -16,10 +16,15 @@ paths:
       tags:
         - "Users"
       summary: "Add user."
-    get: 
-      tags: 
+    get:
+      tags:
         - "Users"
       summary: "Get all users in paginated way."
+  /users/id:
+    get:
+      tags:
+        - "User"
+      summary: "Get one user"
 
 components:
   schemas:
