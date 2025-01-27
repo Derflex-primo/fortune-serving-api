@@ -2,7 +2,7 @@ import { Address, User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
 import { normalize_response_format_user } from "../utils";
-import { query_get_all_users, query_get_user, query_register_user } from "../db/postgres/queries";
+import { query_get_all_users, query_get_user, query_register_user, query_update_user } from "../db/postgres/queries";
 
 export default class ServiceUser {
     private readonly cap_limit: number = 40;
@@ -83,13 +83,17 @@ export default class ServiceUser {
         }
     }
 
-    public async update_user(user: Partial<User>): Promise<User | null> {
+    /**
+     * Updates user details.
+     * @param id - uuid format to be used to update user
+     * @param user - The user details object to be udpate.
+     * @returns The updated user details.
+     */
+    public async update_user(id: string, user: Partial<Omit<User, "password" | "password_hash">>): Promise<Omit<User, "password" | "password_hash"> | null> {
         try {
+            const result = await query_update_user(id, user);
 
-            const user = "S"
-
-
-            return null;
+            return result;
         } catch (error) {
             console.error("Error in returning user", error)
             return null;

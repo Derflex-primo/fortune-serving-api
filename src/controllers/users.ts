@@ -68,9 +68,25 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
 }
 
 export async function handle_update_user(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
     const { user } = res.locals;
     try {
-        const result = await service.update_user(user);         
+        const data = await service.update_user(id, user);
+
+        if (!data) {
+            res.status(400).json({
+                status: "failed",
+                message: "User does not exist",
+                data: null
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User updated succesfully.",
+            data: data
+        })
         next()
         return;
     } catch (error) {

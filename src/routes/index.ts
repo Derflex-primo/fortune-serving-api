@@ -9,6 +9,6 @@ router.get("/users", validate_pagination_query, handle_get_all_user);
 router.post("/users", validate_user_registration, handle_user_registration);
 
 router.get("/users/:id", validate_get_user, handle_get_user);
-router.put("/users/:id", validate_update_user, handle_update_user);
+router.put("/users/:id", validate_get_user, validate_update_user, handle_update_user);
 
 export default router;
