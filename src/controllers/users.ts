@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceUser } from "../services";
 
@@ -57,6 +57,65 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
             status: "ok",
             message: "User fetched succesfully",
             data: data
+        })
+        next()
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
+
+export async function handle_update_user(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const { user } = res.locals;
+    try {
+        const data = await service.update_user(id, user);
+
+        if (!data) {
+            res.status(400).json({
+                status: "failed",
+                message: "User does not exist",
+                data: null
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User updated succesfully.",
+            data: data
+        })
+        next()
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+};
+
+
+export async function handle_delete_user(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+
+    try {
+        const data = await service.delete_user(id);
+
+        if (!data) {
+            res.status(400).json({
+                status: "failed",
+                message: "User does not exist",
+                data: null
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User deleted succesfully",
+            data: null,
         })
         next()
         return;

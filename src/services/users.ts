@@ -2,7 +2,7 @@ import { Address, User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
 import { normalize_response_format_user } from "../utils";
-import { get_all_users_with_pagination, get_user_with_addresses, register_user_with_addresses } from "../db/postgres/queries";
+import { query_get_all_users, query_get_user, query_register_user, query_update_user, query_delete_user } from "../db/postgres/queries";
 
 export default class ServiceUser {
     private readonly cap_limit: number = 40;
@@ -20,7 +20,7 @@ export default class ServiceUser {
     public async register(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
         try {
             const password_hash = await this.protection.hash_password(user.password)
-            const result = await register_user_with_addresses({ ...user, password_hash })
+            const result = await query_register_user({ ...user, password_hash })
 
             return result;
         } catch (error) {
@@ -40,7 +40,7 @@ export default class ServiceUser {
             const order = pagination.order ? pagination.order.toUpperCase() : "ASC";
             const next_page = pagination.next_page ? this.protection.decrypt(pagination.next_page) : null;
 
-            const result = await get_all_users_with_pagination({ limit, order, next_page });
+            const result = await query_get_all_users({ limit, order, next_page });
 
             let cursor_next_page: string | null = null;
 
@@ -72,13 +72,46 @@ export default class ServiceUser {
      */
     public async get_user(id: string): Promise<Omit<User, "password" | "password_hash"> & { addresses: (Address & { address_id: string })[] } | null> {
         try {
-            const result = await get_user_with_addresses(id);
+            const result = await query_get_user(id);
             const user = normalize_response_format_user(result)
 
             //@ts-ignore
             return user;
         } catch (error) {
             console.error("Error in returning user", error)
+            return null;
+        }
+    }
+
+    /**
+     * Updates user details.
+     * @param id - uuid format to be used to update user
+     * @param user - The user details object to be udpate.
+     * @returns The updated user details.
+     */
+    public async update_user(id: string, user: Partial<Omit<User, "password" | "password_hash">>): Promise<Omit<User, "password" | "password_hash"> | null> {
+        try {
+            const result = await query_update_user(id, user);
+
+            return result;
+        } catch (error) {
+            console.error("Error in returning user", error)
+            return null;
+        }
+    }
+
+    /**
+     * Deletes user entirely.
+     * @param id - uuid format to be used to delete user.
+     * @returns A boolean value.
+     */
+    public async delete_user(id: string): Promise<boolean | null> {
+        try {
+            const result = await query_delete_user(id);
+
+            return result;
+        } catch (error) {
+            console.error("Error in deleting user", error)
             return null;
         }
     }

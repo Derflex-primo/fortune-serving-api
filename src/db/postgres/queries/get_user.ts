@@ -1,7 +1,7 @@
 import { Address, User } from "../../../@codegen";
 import pool from "../config";
 
-export default async function get_user_with_addresses(id: string): Promise<(Omit<User, "password" | "password_hash"> & Address & { address_id: string })[] | null> {
+export default async function get_user(id: string): Promise<(Omit<User, "password" | "password_hash"> & Address & { address_id: string })[] | null> {
     const client = await pool.connect();
 
     try {
