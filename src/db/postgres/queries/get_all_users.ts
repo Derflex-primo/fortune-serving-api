@@ -2,7 +2,7 @@ import pool from "../config";
 import { User } from "../../../@codegen";
 import { Pagination } from "../../../types";
 
-export default async function get_all_users_with_pagination(pagination: Pagination): Promise<Omit<User, "password" | "password_hash">[]> {
+export default async function get_all_users(pagination: Pagination): Promise<Omit<User, "password" | "password_hash">[]> {
     const client = await pool.connect();
     const { limit, order, next_page } = pagination;
     
@@ -32,7 +32,7 @@ export default async function get_all_users_with_pagination(pagination: Paginati
         return results.rows
     } catch (error) {
 
-        console.error("Transaction failed: get_all_users_with_pagination", error);
+        console.error("Transaction failed: get_all_users", error);
         throw error;
 
     } finally {

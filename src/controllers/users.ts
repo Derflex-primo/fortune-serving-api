@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceUser } from "../services";
 
@@ -69,10 +68,11 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
 }
 
 export async function handle_update_user(req: Request, res: Response, next: NextFunction) {
-    const { user }: { user: Partial<User> } = req.body;
-
+    const { user } = res.locals;
     try {
-
+        const result = await service.update_user(user);         
+        next()
+        return;
     } catch (error) {
         console.error(error)
         next(error)
