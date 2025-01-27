@@ -2,7 +2,7 @@ import { Address, User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
 import { normalize_response_format_user } from "../utils";
-import { query_get_all_users, query_get_user, query_register_user, query_update_user } from "../db/postgres/queries";
+import { query_get_all_users, query_get_user, query_register_user, query_update_user, query_delete_user } from "../db/postgres/queries";
 
 export default class ServiceUser {
     private readonly cap_limit: number = 40;
@@ -100,4 +100,19 @@ export default class ServiceUser {
         }
     }
 
+    /**
+     * Deletes user entirely.
+     * @param id - uuid format to be used to delete user.
+     * @returns A boolean value.
+     */
+    public async delete_user(id: string): Promise<boolean | null> {
+        try {
+            const result = await query_delete_user(id);
+
+            return result;
+        } catch (error) {
+            console.error("Error in deleting user", error)
+            return null;
+        }
+    }
 }

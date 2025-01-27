@@ -96,6 +96,36 @@ export async function handle_update_user(req: Request, res: Response, next: Next
     }
 };
 
+
+export async function handle_delete_user(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+
+    try {
+        const data = await service.delete_user(id);
+
+        if (!data) {
+            res.status(400).json({
+                status: "failed",
+                message: "User does not exist",
+                data: null
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User deleted succesfully",
+            data: null,
+        })
+        next()
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
+
 export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
     const { user }: { user: UserRegistration } = req.body;
 
