@@ -1,4 +1,5 @@
-import type { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
+import { User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceUser } from "../services";
 
@@ -66,6 +67,18 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
         return;
     }
 }
+
+export async function handle_update_user(req: Request, res: Response, next: NextFunction) {
+    const { user }: { user: Partial<User> } = req.body;
+
+    try {
+
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+};
 
 export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
     const { user }: { user: UserRegistration } = req.body;
