@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-export default async function validate_get_user(req: Request, res: Response, next: NextFunction) {
+export default async function validate_uuid(req: Request, res: Response, next: NextFunction) {
     const { id }= req.params;
     const uuidv4 = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
 
@@ -23,9 +23,9 @@ export default async function validate_get_user(req: Request, res: Response, nex
         next()
         return;
     } catch (error) {
-        console.error("Error during get user validation:", error);
+        console.error("Error during resource id validation:", error);
         res.status(500).json({
-            message: "An unexpected error occurred during get user validation.",
+            message: "An unexpected error occurred during resource id validation.",
         })
         return;
     }
