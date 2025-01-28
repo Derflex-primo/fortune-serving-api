@@ -5,7 +5,11 @@ export default async function delete_user(id: string): Promise<boolean> {
 
     try {
 
-        return true;
+        const query = `DELETE FROM users WHERE id = $1`;
+
+        const result = await client.query(query, [id]);
+
+        return (result.rowCount as number > 0);
     } catch (error) {
 
         console.error("Transaction failed: get_user", error);

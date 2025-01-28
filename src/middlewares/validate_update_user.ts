@@ -5,6 +5,14 @@ export default async function validate_update_user(req: Request, res: Response, 
     const { user }: { user: Partial<User> } = req.body;
 
     try {
+        if (!user) {
+            res.status(400).json({
+                valid: false,
+                message: "User object is required."
+            })
+            return;
+        };
+
         let fields_to_update = {};
 
         if (user.full_name && typeof user.full_name === "string") {
