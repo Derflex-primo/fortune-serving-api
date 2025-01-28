@@ -19,13 +19,69 @@ import {
 
 const router = Router();
 
-//users
-router.get("/users", validate_pagination_query, handle_get_users);
-router.post("/users", validate_post_user, handle_post_user);
-router.get("/users/:id", validate_uuid, handle_get_user);
-router.patch("/users/:id", validate_uuid, validate_update_user, handle_update_user);
-router.delete("/users/:id", validate_uuid, handle_delete_user);
-router.get("/users/:id/addresses", validate_uuid, handle_get_user_addresses);
-router.post("/users/:id/addresses", validate_uuid, validate_addresses, handle_post_user_address);
+/** --------------------------------------------------------------------------------------
+ *                                                                                       *
+ * @author        Users                                                                  *
+ * @description   Routes for managing user, including creation, retrieval,               *
+ *                updates, and deletion.                                                 *
+ *                                                                                       *
+ * --------------------------------------------------------------------------------------*/
+
+router.post(
+    "/users",
+    validate_post_user,
+    handle_post_user
+);
+
+router.get(
+    "/users",
+    validate_pagination_query,
+    handle_get_users
+);
+
+router.get(
+    "/users/:id",
+    validate_uuid(["id"]),
+    handle_get_user
+);
+
+router.patch(
+    "/users/:id",
+    validate_uuid(["id"]),
+    validate_update_user,
+    handle_update_user
+);
+
+router.delete(
+    "/users/:id",
+    validate_uuid(["id"]),
+    handle_delete_user
+);
+
+/** --------------------------------------------------------------------------------------
+ *                                                                                       *
+ * @author        Users addresses                                                        *
+ * @description   Routes for managing user, including creation, retrieval,               *
+ *                updates, and deletion.                                                 *
+ *                                                                                       *
+ * --------------------------------------------------------------------------------------*/
+
+router.get(
+    "/users/:id/addresses",
+    validate_uuid(["id"]),
+    handle_get_user_addresses
+);
+
+router.post(
+    "/users/:id/addresses",
+    validate_uuid(["id"]),
+    validate_addresses,
+    handle_post_user_address
+);
+
+router.get(
+    "/users/:id/addresses/:address_id",
+    validate_uuid(["id", "address_id"]),
+);
 
 export default router;
