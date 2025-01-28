@@ -13,7 +13,8 @@ import {
     validate_user_registration,
     validate_uuid,
     validate_update_user,
-} from "../middlewares";
+    validate_addresses
+} from "../validators";
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.get("/users/:id", validate_uuid, handle_get_user);
 router.patch("/users/:id", validate_uuid, validate_update_user, handle_update_user);
 router.delete("/users/:id", validate_uuid, handle_delete_user);
 router.get("/users/:id/addresses", validate_uuid, handle_get_user_addresses);
+router.post("/users/:id/addresses", validate_uuid, validate_addresses);
 
 export default router;

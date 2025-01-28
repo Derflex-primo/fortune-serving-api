@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { UserRegistration } from "../types";
-import { validate_user_object } from "../utils";
+import validate_user_object from "./validate_user_object";
 
 export default function validate_user_registration(req: Request, res: Response, next: NextFunction) {
     const { user }: { user: Partial<UserRegistration> } = req.body;
