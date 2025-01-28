@@ -43,7 +43,8 @@ export default async function validate_pagination_query(req: Request, res: Respo
             }
         }
 
-        next();
+        next()
+        return;
     } catch (error) {
         console.error("Error during pagination query validation:", error)
         res.status(500).json({

@@ -7,6 +7,7 @@ import {
     query_get_user,
     query_get_user_addresses,
     query_post_user,
+    query_post_user_address,
     query_update_user,
     query_delete_user
 } from "../db/postgres/queries";
@@ -20,9 +21,9 @@ export default class ServiceUser {
     }
 
     /**
-     * Add a user in the users table along with their addresses.
-     * @param user - The user registration object containing user details.
-     * @returns The registered user object, excluding password and password_hash, and including addresses, or undefined if an error occurs.
+     * Adds a user in the users table along with their addresses.
+     * @param user - The user object containing user details.
+     * @returns The addded user object, excluding password and password_hash, and including addresses, or undefined if an error occurs.
      */
     public async post_user(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
         try {
@@ -36,8 +37,21 @@ export default class ServiceUser {
         }
     }
 
-    public async post_user_address(address: Address): Promise<Address | null> {
-        return null
+    /**
+     * Adds a address in addresses table.
+     * @param id - uuid format to be used as foreign key to add address.
+     * @param address - The address object, containing required fields.
+     * @returns The added address object.
+     */
+    public async post_user_address(id: string, address: Address): Promise<Address | null> {
+        try {
+            const result = await query_post_user_address(id, address);
+ 
+            return result;
+        } catch (error) {
+            console.error("Error adding address", error);
+            return null;
+        }
     }
 
     /**

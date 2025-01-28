@@ -174,7 +174,7 @@ export async function handle_post_user(req: Request, res: Response, next: NextFu
 
         res.status(201).json({
             status: "ok",
-            message: "User registered successfully.",
+            message: "User added successfully.",
             data: data,
         })
         return;
@@ -186,10 +186,11 @@ export async function handle_post_user(req: Request, res: Response, next: NextFu
 };
 
 export async function handle_post_user_address(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
     const { address }: { address: Address } = req.body;
 
     try {
-        const data = await service.post_user_address(address);
+        const data = await service.post_user_address(id, address);
 
         if (!data) {
             res.status(422).json({
@@ -202,7 +203,7 @@ export async function handle_post_user_address(req: Request, res: Response, next
 
         res.status(201).json({
             status: "ok",
-            message: "User registered successfully.",
+            message: "Address added successfully.",
             data: data,
         })
         next()

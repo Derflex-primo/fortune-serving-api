@@ -14,6 +14,14 @@ export default async function validate_addresses(req: Request, res: Response, ne
             return;
         }
 
+        if (!address.address_type || typeof address.address_type !== "string") {
+            res.status(400).json({
+                valid: false,
+                message: "Each address must include a valid address type."
+            })
+            return;
+        }
+
         if (!address.street_address || typeof address.street_address !== "string") {
             res.status(400).json({
                 valid: false,
@@ -46,6 +54,8 @@ export default async function validate_addresses(req: Request, res: Response, ne
             return;
         }
 
+        next()
+        return;
     } catch (error) {
         console.error("Error during addresses validation:", error);
         res.status(500).json({
