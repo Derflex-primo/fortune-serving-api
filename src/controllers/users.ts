@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
+import { Address } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceUser } from "../services";
 
 const service = new ServiceUser();
 
-export async function handle_get_all_user(req: Request, res: Response, next: NextFunction) {
+export async function handle_get_users(req: Request, res: Response, next: NextFunction) {
     const { limit, next_page, order }: Partial<Pagination> = req.query;
 
     const pagination = {
@@ -14,7 +15,7 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
     };
 
     try {
-        const data = await service.get_all_users(pagination)
+        const data = await service.get_users(pagination)
         const users = data && data.users || [];
 
         if (users && users.length === 0) {
@@ -156,11 +157,21 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
     }
 }
 
-export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
+export async function handle_post_user(req: Request, res: Response, next: NextFunction) {
     const { user }: { user: UserRegistration } = req.body;
 
     try {
-        const data = await service.register(user);
+        const data = await service.post_user(user);
+
+        if (!data) {
+            res.status(422).json({
+                status: "failed",
+                message: "Unprocessable entity.",
+                data: data,
+            })
+            return;
+        }
+
         res.status(201).json({
             status: "ok",
             message: "User registered successfully.",
@@ -173,3 +184,32 @@ export async function handle_user_registration(req: Request, res: Response, next
         return;
     }
 };
+
+export async function handle_post_user_address(req: Request, res: Response, next: NextFunction) {
+    const { address }: { address: Address } = req.body;
+
+    try {
+        const data = await service.post_user_address(address);
+
+        if (!data) {
+            res.status(422).json({
+                status: "failed",
+                message: "Unprocessable entity.",
+                data: data,
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User registered successfully.",
+            data: data,
+        })
+        next()
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}

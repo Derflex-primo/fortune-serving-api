@@ -3,10 +3,10 @@ import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
 import { normalize_response_format_user } from "../utils";
 import {
-    query_get_all_users,
+    query_get_users,
     query_get_user,
     query_get_user_addresses,
-    query_register_user,
+    query_post_user,
     query_update_user,
     query_delete_user
 } from "../db/postgres/queries";
@@ -20,14 +20,14 @@ export default class ServiceUser {
     }
 
     /**
-     * Registers a user in the users table along with their addresses.
+     * Add a user in the users table along with their addresses.
      * @param user - The user registration object containing user details.
      * @returns The registered user object, excluding password and password_hash, and including addresses, or undefined if an error occurs.
      */
-    public async register(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
+    public async post_user(user: UserRegistration): Promise<(Omit<User, "password" | "password_hash"> & { addresses: Address[] }) | null> {
         try {
             const password_hash = await this.protection.hash_password(user.password)
-            const result = await query_register_user({ ...user, password_hash })
+            const result = await query_post_user({ ...user, password_hash })
 
             return result;
         } catch (error) {
@@ -36,18 +36,22 @@ export default class ServiceUser {
         }
     }
 
+    public async post_user_address(address: Address): Promise<Address | null> {
+        return null
+    }
+
     /**
      * Returns all the users in paginated way.
      * @param pagination - The pagination query for cursor or keyset pagination.
      * @returns A subset of user rows based on the n of limit specified. 
      */
-    public async get_all_users(pagination: Partial<Pagination>): Promise<{ users: Omit<User, "password" | "password_hash">[], pagination: Pagination } | null> {
+    public async get_users(pagination: Partial<Pagination>): Promise<{ users: Omit<User, "password" | "password_hash">[], pagination: Pagination } | null> {
         try {
             const limit = pagination.limit || this.cap_limit;
             const order = pagination.order ? pagination.order.toUpperCase() : "ASC";
             const next_page = pagination.next_page ? this.protection.decrypt(pagination.next_page) : null;
 
-            const result = await query_get_all_users({ limit, order, next_page });
+            const result = await query_get_users({ limit, order, next_page });
 
             let cursor_next_page: string | null = null;
 
