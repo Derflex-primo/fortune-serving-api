@@ -18,7 +18,7 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
         const users = data && data.users || [];
 
         if (users && users.length === 0) {
-            res.status(200).json({
+            res.status(404).json({
                 status: "ok",
                 mesage: "No users found",
                 data: []
@@ -45,7 +45,7 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
     try {
         const data = await service.get_user(id);
         if (!data) {
-            res.status(400).json({
+            res.status(404).json({
                 status: "failed",
                 message: "User does not exist.",
                 data: null
@@ -73,8 +73,8 @@ export async function handle_get_user_addresses(req: Request, res: Response, nex
     try {
         const data = await service.get_user_addresses(id);
 
-        if (!data) {
-            res.status(400).json({
+        if (!data || data.length === 0) {
+            res.status(404).json({
                 status: "failed",
                 message: "No addresses found.",
                 data: null
@@ -104,7 +104,7 @@ export async function handle_update_user(req: Request, res: Response, next: Next
         const data = await service.update_user(id, user);
 
         if (!data) {
-            res.status(400).json({
+            res.status(404).json({
                 status: "failed",
                 message: "User does not exist.",
                 data: null
@@ -134,7 +134,7 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
         const data = await service.delete_user(id);
 
         if (!data) {
-            res.status(400).json({
+            res.status(404).json({
                 status: "failed",
                 message: "User does not exist.",
                 data: null

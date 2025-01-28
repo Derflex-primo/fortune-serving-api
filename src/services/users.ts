@@ -95,7 +95,7 @@ export default class ServiceUser {
      * @param id - uuid format to be used to fetch user addresses.
      * @returns User addresses.
      */
-    public async get_user_addresses(id: string): Promise<Address | null> {
+    public async get_user_addresses(id: string): Promise<Address[] | null> {
         try {
             const result = await query_get_user_addresses(id);
 
