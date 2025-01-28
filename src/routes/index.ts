@@ -61,7 +61,7 @@ router.delete(
 /** --------------------------------------------------------------------------------------
  *                                                                                       *
  * @author        Users addresses                                                        *
- * @description   Routes for managing user, including creation, retrieval,               *
+ * @description   Routes for managing user addresses, including creation, retrieval,     *
  *                updates, and deletion.                                                 *
  *                                                                                       *
  * --------------------------------------------------------------------------------------*/
