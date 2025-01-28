@@ -2,7 +2,14 @@ import { Address, User } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceProtection } from "./index";
 import { normalize_response_format_user } from "../utils";
-import { query_get_all_users, query_get_user, query_register_user, query_update_user, query_delete_user } from "../db/postgres/queries";
+import {
+    query_get_all_users,
+    query_get_user,
+    query_get_user_addresses,
+    query_register_user,
+    query_update_user,
+    query_delete_user
+} from "../db/postgres/queries";
 
 export default class ServiceUser {
     private readonly cap_limit: number = 40;
@@ -83,8 +90,20 @@ export default class ServiceUser {
         }
     }
 
+    /**
+     * Returns user addresses.
+     * @param id - uuid format to be used to fetch user addresses.
+     * @returns User addresses.
+     */
     public async get_user_addresses(id: string): Promise<Address | null> {
-        return null;
+        try {
+            const result = await query_get_user_addresses(id);
+
+            return result;
+        } catch (error) {
+            console.error("Error in returning user", error)
+            return null;
+        }
     }
 
     /**
