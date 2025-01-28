@@ -312,9 +312,37 @@ export type PostUsersData = {
     url: '/users';
 };
 
-export type GetUsersIdData = {
+export type DeleteUsersByIdData = {
     body?: never;
     path?: never;
     query?: never;
-    url: '/users/id';
+    url: '/users/{id}';
+};
+
+export type GetUsersByIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/{id}';
+};
+
+export type PatchUsersByIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/{id}';
+};
+
+export type GetUsersByIdAddressesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/{id}/addresses';
+};
+
+export type PostUsersByIdAddressesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/{id}/addresses';
 };

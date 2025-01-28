@@ -15,16 +15,35 @@ paths:
     post:
       tags:
         - "Users"
-      summary: "Add user."
+      summary: "Create a new user."
     get:
       tags:
         - "Users"
-      summary: "Get all users in paginated way."
-  /users/id:
+      summary: "Retrieve a paginated list of users."
+
+  /users/{id}:
     get:
       tags:
-        - "User"
-      summary: "Get one user"
+        - "Users"
+      summary: "Retrieve a user by ID."
+    patch:
+      tags:
+        - "Users"
+      summary: "Update user fields by ID."
+    delete:
+      tags:
+        - "Users"
+      summary: "Delete a user by ID."
+
+  /users/{id}/addresses:
+    get:
+      tags:
+        - "Users"
+      summary: "Retrieve a user's addresses."
+    post:
+      tags:
+        - "Users"
+      summary: "Add a new address for a user."
 
 components:
   schemas:
