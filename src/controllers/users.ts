@@ -106,7 +106,7 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
         if (!data) {
             res.status(400).json({
                 status: "failed",
-                message: "User does not exist",
+                message: "User does not exist.",
                 data: null
             })
             return;
@@ -114,7 +114,7 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
 
         res.status(201).json({
             status: "ok",
-            message: "User deleted succesfully",
+            message: "User deleted succesfully.",
             data: null,
         })
         next()
