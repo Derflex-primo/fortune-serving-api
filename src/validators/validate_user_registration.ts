@@ -9,15 +9,15 @@ export default function validate_user_registration(req: Request, res: Response, 
         const validation = validate_user_object(user)
 
         if (!validation.valid) {
-            res.status(400).json({ valid: validation.valid, message: validation.message });
+            res.status(400).json({ valid: validation.valid, message: validation.message })
             return;
         }
 
-        next();
+        next()
         return;
     } catch (error) {
-        console.error("Error during user validation:", error);
-        res.status(500).json({ message: "An unexpected error occurred during user validation." });
+        console.error("Error during user validation:", error)
+        res.status(500).json({ message: "An unexpected error occurred during user validation." })
         return;
     }
 }
