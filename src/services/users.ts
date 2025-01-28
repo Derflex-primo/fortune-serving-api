@@ -83,6 +83,10 @@ export default class ServiceUser {
         }
     }
 
+    public async get_user_addresses(id: string): Promise<Address | null> {
+        return null;
+    }
+
     /**
      * Updates user details.
      * @param id - uuid format to be used to update user

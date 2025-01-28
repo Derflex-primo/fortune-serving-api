@@ -47,7 +47,7 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
         if (!data) {
             res.status(400).json({
                 status: "failed",
-                message: "User does not exist",
+                message: "User does not exist.",
                 data: null
             })
             return;
@@ -55,7 +55,7 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
 
         res.status(201).json({
             status: "ok",
-            message: "User fetched succesfully",
+            message: "User fetched succesfully.",
             data: data
         })
         next()
@@ -67,16 +67,46 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
     }
 }
 
+export async function handle_get_user_addresses(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+
+    try {
+        const data = await service.get_user_addresses(id);
+
+        if (!data) {
+            res.status(400).json({
+                status: "failed",
+                message: "No addresses found.",
+                data: null
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User addresses fetched succesfully.",
+            data: data
+        })
+        next()
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+};
+
 export async function handle_update_user(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     const { user } = res.locals;
+
     try {
         const data = await service.update_user(id, user);
 
         if (!data) {
             res.status(400).json({
                 status: "failed",
-                message: "User does not exist",
+                message: "User does not exist.",
                 data: null
             })
             return;
