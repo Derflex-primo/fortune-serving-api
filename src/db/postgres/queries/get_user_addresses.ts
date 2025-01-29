@@ -1,5 +1,5 @@
-import { Address } from "../../../@codegen";
 import pool from "../config";
+import { Address } from "../../../@codegen";
 
 export default async function get_user_addresses(id: string): Promise<Address[]> {
     const client = await pool.connect();

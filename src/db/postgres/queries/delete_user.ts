@@ -12,7 +12,7 @@ export default async function delete_user(id: string): Promise<boolean> {
         return (result.rowCount as number > 0);
     } catch (error) {
 
-        console.error("Transaction failed: get_user", error);
+        console.error("Transaction failed: delete_user", error);
         throw error;
 
     } finally {
