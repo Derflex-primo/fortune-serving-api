@@ -53,6 +53,10 @@ paths:
       tags:
        - "Users"
       summary: "Update user address fields by id and address_id."
+    delete:
+      tags:
+      - "Users"
+      summary: "Delete user address fields by id and address_id."
 
 components:
   schemas:

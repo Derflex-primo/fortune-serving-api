@@ -347,6 +347,13 @@ export type PostUsersByIdAddressesData = {
     url: '/users/{id}/addresses';
 };
 
+export type DeleteUsersByIdAddressesByAddressIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/{id}/addresses/{address_id}';
+};
+
 export type GetUsersByIdAddressesByAddressIdData = {
     body?: never;
     path?: never;

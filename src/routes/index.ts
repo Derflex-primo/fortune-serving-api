@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
     handle_post_user,
+    handle_post_user_address,
     handle_get_users,
     handle_get_user,
     handle_get_user_addresses,
@@ -8,7 +9,7 @@ import {
     handle_update_user,
     handle_update_user_address,
     handle_delete_user,
-    handle_post_user_address,
+    handle_delete_user_address
 } from "../controllers";
 import {
     validate_pagination_query,
@@ -92,6 +93,12 @@ router.put(
     validate_uuid(["id", "address_id"]),
     validate_addresses,
     handle_update_user_address
-)
+);
+
+router.delete(
+    "/users/:id/addresses/:address_id",
+    validate_uuid(["id", "address_id"]),
+    handle_delete_user_address
+);
 
 export default router;
