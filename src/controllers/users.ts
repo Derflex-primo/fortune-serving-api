@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
+import { Address } from "../@codegen";
 import { Pagination, UserRegistration } from "../types";
 import { ServiceUser } from "../services";
 
 const service = new ServiceUser();
 
-export async function handle_get_all_user(req: Request, res: Response, next: NextFunction) {
+export async function handle_get_users(req: Request, res: Response, next: NextFunction) {
     const { limit, next_page, order }: Partial<Pagination> = req.query;
 
     const pagination = {
@@ -14,20 +15,20 @@ export async function handle_get_all_user(req: Request, res: Response, next: Nex
     };
 
     try {
-        const data = await service.get_all_users(pagination)
+        const data = await service.get_users(pagination)
         const users = data && data.users || [];
 
         if (users && users.length === 0) {
             res.status(200).json({
-                status: "ok",
-                mesage: "No users found",
+                status: "success",
+                mesage: "No users found.",
                 data: []
             })
             return;
         }
 
         res.status(200).json({
-            status: "ok",
+            status: "success",
             message: "Users fetched succesfully.",
             data: data
         })
@@ -45,7 +46,7 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
     try {
         const data = await service.get_user(id);
         if (!data) {
-            res.status(400).json({
+            res.status(404).json({
                 status: "failed",
                 message: "User does not exist.",
                 data: null
@@ -53,12 +54,11 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User fetched succesfully.",
             data: data
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -73,8 +73,8 @@ export async function handle_get_user_addresses(req: Request, res: Response, nex
     try {
         const data = await service.get_user_addresses(id);
 
-        if (!data) {
-            res.status(400).json({
+        if (!data || data.length === 0) {
+            res.status(404).json({
                 status: "failed",
                 message: "No addresses found.",
                 data: null
@@ -82,12 +82,11 @@ export async function handle_get_user_addresses(req: Request, res: Response, nex
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User addresses fetched succesfully.",
             data: data
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -95,6 +94,34 @@ export async function handle_get_user_addresses(req: Request, res: Response, nex
         return;
     }
 };
+
+export async function handle_get_user_address(req: Request, res: Response, next: NextFunction) {
+    const { id, address_id } = req.params;
+
+    try {
+        const data = await service.get_user_address(id, address_id);
+
+        if (!data) {
+            res.status(404).json({
+                status: "failed",
+                message: "No address found.",
+                data: null
+            })
+            return;
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "User address fetched succesfully.",
+            data: data
+        })
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
 
 export async function handle_update_user(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
@@ -104,7 +131,7 @@ export async function handle_update_user(req: Request, res: Response, next: Next
         const data = await service.update_user(id, user);
 
         if (!data) {
-            res.status(400).json({
+            res.status(404).json({
                 status: "failed",
                 message: "User does not exist.",
                 data: null
@@ -112,12 +139,11 @@ export async function handle_update_user(req: Request, res: Response, next: Next
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User updated succesfully.",
             data: data
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -125,6 +151,34 @@ export async function handle_update_user(req: Request, res: Response, next: Next
         return;
     }
 };
+
+export async function handle_update_user_address(req: Request, res: Response, next: NextFunction) {
+    const { id, address_id } = req.params;
+    const { address }: { address: Address } = req.body;
+
+    try {
+        const data = await service.update_user_address(id, address_id, address);
+
+        if (!data) {
+            res.status(404).json({
+                status: "failed",
+                message: "No address found.",
+                data: null
+            })
+            return;
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "Address updated successfully"
+        })
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
 
 
 export async function handle_delete_user(req: Request, res: Response, next: NextFunction) {
@@ -134,7 +188,7 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
         const data = await service.delete_user(id);
 
         if (!data) {
-            res.status(400).json({
+            res.status(404).json({
                 status: "failed",
                 message: "User does not exist.",
                 data: null
@@ -142,12 +196,11 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User deleted succesfully.",
             data: null,
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -156,14 +209,24 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
     }
 }
 
-export async function handle_user_registration(req: Request, res: Response, next: NextFunction) {
+export async function handle_post_user(req: Request, res: Response, next: NextFunction) {
     const { user }: { user: UserRegistration } = req.body;
 
     try {
-        const data = await service.register(user);
+        const data = await service.post_user(user);
+
+        if (!data) {
+            res.status(409).json({
+                status: "failed",
+                message: "User already exists.",
+                data: data,
+            })
+            return;
+        }
+
         res.status(201).json({
-            status: "ok",
-            message: "User registered successfully.",
+            status: "success",
+            message: "User added successfully.",
             data: data,
         })
         return;
@@ -173,3 +236,32 @@ export async function handle_user_registration(req: Request, res: Response, next
         return;
     }
 };
+
+export async function handle_post_user_address(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const { address }: { address: Address } = req.body;
+
+    try {
+        const data = await service.post_user_address(id, address);
+
+        if (!data) {
+            res.status(409).json({
+                status: "failed",
+                message: "Address already exist.",
+                data: data,
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "success",
+            message: "Address added successfully.",
+            data: data,
+        })
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
