@@ -6,6 +6,7 @@ import {
     handle_get_user_addresses,
     handle_get_user_address,
     handle_update_user,
+    handle_update_user_address,
     handle_delete_user,
     handle_post_user_address,
 } from "../controllers";
@@ -85,5 +86,12 @@ router.get(
     validate_uuid(["id", "address_id"]),
     handle_get_user_address
 );
+
+router.put(
+    "/users/:id/addresses/:address_id",
+    validate_uuid(["id", "address_id"]),
+    validate_addresses,
+    handle_update_user_address
+)
 
 export default router;

@@ -159,6 +159,10 @@ export default class ServiceUser {
         }
     }
 
+    public async update_user_address(id: string, address_id: string, address: Address): Promise<Address | null> {
+        return null;
+    }
+
     /**
      * Deletes user entirely.
      * @param id - uuid format to be used to delete user.

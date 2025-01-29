@@ -19,16 +19,16 @@ export async function handle_get_users(req: Request, res: Response, next: NextFu
         const users = data && data.users || [];
 
         if (users && users.length === 0) {
-            res.status(404).json({
-                status: "ok",
-                mesage: "No users found",
+            res.status(200).json({
+                status: "success",
+                mesage: "No users found.",
                 data: []
             })
             return;
         }
 
         res.status(200).json({
-            status: "ok",
+            status: "success",
             message: "Users fetched succesfully.",
             data: data
         })
@@ -54,12 +54,11 @@ export async function handle_get_user(req: Request, res: Response, next: NextFun
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User fetched succesfully.",
             data: data
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -83,12 +82,11 @@ export async function handle_get_user_addresses(req: Request, res: Response, nex
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User addresses fetched succesfully.",
             data: data
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -112,12 +110,11 @@ export async function handle_get_user_address(req: Request, res: Response, next:
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User address fetched succesfully.",
             data: data
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -142,12 +139,11 @@ export async function handle_update_user(req: Request, res: Response, next: Next
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User updated succesfully.",
             data: data
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -155,6 +151,34 @@ export async function handle_update_user(req: Request, res: Response, next: Next
         return;
     }
 };
+
+export async function handle_update_user_address(req: Request, res: Response, next: NextFunction) {
+    const { id, address_id } = req.params;
+    const { address }: { address: Address } = req.body;
+
+    try {
+        const data = await service.update_user_address(id, address_id, address);
+
+        if (!data) {
+            res.status(404).json({
+                status: "failed",
+                message: "No address found.",
+                data: null
+            })
+            return;
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "Address updated successfully"
+        })
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
 
 
 export async function handle_delete_user(req: Request, res: Response, next: NextFunction) {
@@ -172,12 +196,11 @@ export async function handle_delete_user(req: Request, res: Response, next: Next
             return;
         }
 
-        res.status(201).json({
-            status: "ok",
+        res.status(200).json({
+            status: "success",
             message: "User deleted succesfully.",
             data: null,
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
@@ -193,16 +216,16 @@ export async function handle_post_user(req: Request, res: Response, next: NextFu
         const data = await service.post_user(user);
 
         if (!data) {
-            res.status(422).json({
+            res.status(409).json({
                 status: "failed",
-                message: "Unprocessable entity.",
+                message: "User already exists.",
                 data: data,
             })
             return;
         }
 
         res.status(201).json({
-            status: "ok",
+            status: "success",
             message: "User added successfully.",
             data: data,
         })
@@ -222,20 +245,19 @@ export async function handle_post_user_address(req: Request, res: Response, next
         const data = await service.post_user_address(id, address);
 
         if (!data) {
-            res.status(422).json({
+            res.status(409).json({
                 status: "failed",
-                message: "Unprocessable entity.",
+                message: "Address already exist.",
                 data: data,
             })
             return;
         }
 
         res.status(201).json({
-            status: "ok",
+            status: "success",
             message: "Address added successfully.",
             data: data,
         })
-        next()
         return;
     } catch (error) {
         console.error(error)
