@@ -97,6 +97,35 @@ export async function handle_get_user_addresses(req: Request, res: Response, nex
     }
 };
 
+export async function handle_get_user_address(req: Request, res: Response, next: NextFunction) {
+    const { id, address_id } = req.params;
+
+    try {
+        const data = await service.get_user_address(id, address_id);
+
+        if (!data) {
+            res.status(404).json({
+                status: "failed",
+                message: "No address found.",
+                data: null
+            })
+            return;
+        }
+
+        res.status(201).json({
+            status: "ok",
+            message: "User address fetched succesfully.",
+            data: data
+        })
+        next()
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
+
 export async function handle_update_user(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     const { user } = res.locals;

@@ -4,6 +4,7 @@ import {
     handle_get_users,
     handle_get_user,
     handle_get_user_addresses,
+    handle_get_user_address,
     handle_update_user,
     handle_delete_user,
     handle_post_user_address,
@@ -82,6 +83,7 @@ router.post(
 router.get(
     "/users/:id/addresses/:address_id",
     validate_uuid(["id", "address_id"]),
+    handle_get_user_address
 );
 
 export default router;
