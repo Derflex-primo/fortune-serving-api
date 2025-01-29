@@ -10,6 +10,7 @@ import {
     query_post_user,
     query_post_user_address,
     query_update_user,
+    query_update_user_address,
     query_delete_user
 } from "../db/postgres/queries";
 
@@ -47,7 +48,7 @@ export default class ServiceUser {
     public async post_user_address(id: string, address: Address): Promise<Address | null> {
         try {
             const result = await query_post_user_address(id, address);
- 
+
             return result;
         } catch (error) {
             console.error("Error adding address", error);
@@ -159,8 +160,22 @@ export default class ServiceUser {
         }
     }
 
+    /**
+     * Updates users address.
+     * @param id - uuid format to be used to update user.
+     * @param address_id - uuid format to be used to identify which address to update.
+     * @param address - The user address object to be udpate.
+     * @returns The updated user address.
+     */
     public async update_user_address(id: string, address_id: string, address: Address): Promise<Address | null> {
-        return null;
+        try {
+            const result = await query_update_user_address(id, address_id, address);
+
+            return result;
+        } catch (error) {
+            console.error("Error in updating user address", error)
+            return null;
+        }
     }
 
     /**

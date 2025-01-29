@@ -353,3 +353,10 @@ export type GetUsersByIdAddressesByAddressIdData = {
     query?: never;
     url: '/users/{id}/addresses/{address_id}';
 };
+
+export type PutUsersByIdAddressesByAddressIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/{id}/addresses/{address_id}';
+};

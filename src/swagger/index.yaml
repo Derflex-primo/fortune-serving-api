@@ -25,15 +25,15 @@ paths:
     get:
       tags:
         - "Users"
-      summary: "Retrieve a user by ID."
+      summary: "Retrieve a user by id."
     patch:
       tags:
         - "Users"
-      summary: "Update user fields by ID."
+      summary: "Update user fields by id."
     delete:
       tags:
         - "Users"
-      summary: "Delete a user by ID."
+      summary: "Delete a user by id."
 
   /users/{id}/addresses:
     get:
@@ -49,6 +49,10 @@ paths:
       tags:
         - "Users"
       summary: "Retrieve a user's address."
+    put: 
+      tags:
+       - "Users"
+      summary: "Update user address fields by id and address_id."
 
 components:
   schemas:

@@ -170,7 +170,8 @@ export async function handle_update_user_address(req: Request, res: Response, ne
 
         res.status(200).json({
             status: "success",
-            message: "Address updated successfully"
+            message: "Address updated successfully",
+            data: data
         })
         return;
     } catch (error) {
