@@ -346,3 +346,10 @@ export type PostUsersByIdAddressesData = {
     query?: never;
     url: '/users/{id}/addresses';
 };
+
+export type GetUsersByIdAddressesByAddressIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/users/{id}/addresses/{address_id}';
+};

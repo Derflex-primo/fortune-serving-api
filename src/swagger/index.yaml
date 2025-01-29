@@ -44,6 +44,11 @@ paths:
       tags:
         - "Users"
       summary: "Add a new address for a user."
+  /users/{id}/addresses/{address_id}:
+    get:
+      tags:
+        - "Users"
+      summary: "Retrieve a user's address."
 
 components:
   schemas:

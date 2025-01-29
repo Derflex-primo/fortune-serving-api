@@ -6,6 +6,7 @@ import {
     query_get_users,
     query_get_user,
     query_get_user_addresses,
+    query_get_user_address,
     query_post_user,
     query_post_user_address,
     query_update_user,
@@ -124,8 +125,21 @@ export default class ServiceUser {
         }
     }
 
+    /**
+     * Returns user address.
+     * @param id -  uuid format to be used to fetch user address.
+     * @param address_id - uuid format to be used to identify which address to fetch.
+     * @returns  User address.
+     */
     public async get_user_address(id: string, address_id: string): Promise<Address | null> {
-        return null
+        try {
+            const result = await query_get_user_address(id, address_id);
+
+            return result;
+        } catch (error) {
+            console.error("Error in returning user", error)
+            return null;
+        }
     }
 
     /**
