@@ -51,11 +51,6 @@ properties:
       - other
     description: "The type of the template, based on its use case."
     example: "portfolio"
-  user_id:
-    type: string
-    format: uuid
-    description: "The unique identifier of the user who created the template."
-    example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   created_at:
     type: string
     format: date-time

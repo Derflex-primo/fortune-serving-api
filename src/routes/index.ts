@@ -9,7 +9,8 @@ import {
     handle_update_user,
     handle_update_user_address,
     handle_delete_user,
-    handle_delete_user_address
+    handle_delete_user_address,
+    handle_post_template
 } from "../controllers";
 import {
     validate_pagination_query,
@@ -17,7 +18,8 @@ import {
     validate_post_user,
     validate_uuid,
     validate_update_user,
-    validate_addresses
+    validate_addresses,
+    validate_post_template
 } from "../validators";
 
 const router = Router();
@@ -109,4 +111,9 @@ router.delete(
  *                                                                                       *
  * --------------------------------------------------------------------------------------*/
 
+router.post(
+    "/templates",
+    validate_post_template,
+    handle_post_template
+)
 export default router;

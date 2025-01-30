@@ -24,9 +24,6 @@ CREATE TABLE templates (
         thumbnail_image    text,
         is_active          boolean default true,
         template_type      template_type default 'other',
-        user_id            uuid not null,
         created_at         timestamp default current_timestamp,
-        updated_at         timestamp default current_timestamp,
-
-        foreign key (user_id) references users(id) on delete cascade on update cascade
+        updated_at         timestamp default current_timestamp
 );
