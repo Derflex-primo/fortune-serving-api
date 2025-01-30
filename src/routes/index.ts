@@ -101,4 +101,12 @@ router.delete(
     handle_delete_user_address
 );
 
+/** --------------------------------------------------------------------------------------
+ *                                                                                       *
+ * @author        Templates                                                              *
+ * @description   Routes for managing user addresses, including creation, retrieval,     *
+ *                updates, and deletion.                                                 *
+ *                                                                                       *
+ * --------------------------------------------------------------------------------------*/
+
 export default router;
