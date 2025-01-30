@@ -44,7 +44,7 @@ export default async function validate_update_user(req: Request, res: Response, 
         return;
     } catch (error) {
         console.error("Error during update user:", error)
-        res.status(500).json({ message: "An unexpected error occurred during udpate user." })
+        res.status(500).json({ message: "An unexpected error occurred during udpate user validation." })
         return;
     }
 } 

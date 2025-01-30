@@ -109,10 +109,6 @@ export type Template = {
      */
     template_type?: 'ecommerce' | 'blog' | 'portfolio' | 'entertainment' | 'marketing' | 'educational' | 'health and wellness' | 'corporate' | 'real estate' | 'nonprofit' | 'food and beverage' | 'travel' | 'sports and fitness' | 'technology' | 'other';
     /**
-     * The unique identifier of the user who created the template.
-     */
-    user_id?: string;
-    /**
      * The date and time when the template record was created, automatically set to the current time in ISO 8601 format (e.g., 'YYYY-MM-DDTHH:mm:ss').
      */
     created_at?: string;
