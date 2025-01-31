@@ -1,5 +1,5 @@
-import pool from "../config";
-import { Address } from "../../../@codegen";
+import pool from "../../config";
+import { Address } from "../../../../@codegen";
 
 export default async function update_user_address(id: string, address_id: string, address: Address): Promise<Address> {
     const client = await pool.connect()

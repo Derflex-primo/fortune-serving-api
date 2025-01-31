@@ -1,11 +1,10 @@
-import pool from "../config";
-import { Address, User } from "../../../@codegen";
+import pool from "../../config";
+import { Address, User } from "../../../../@codegen";
 
 export default async function get_user(id: string): Promise<(Omit<User, "password" | "password_hash"> & Address & { address_id: string })[] | null> {
     const client = await pool.connect();
 
     try {
-
         const query = `
               SELECT 
                   u.id, 

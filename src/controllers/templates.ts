@@ -21,7 +21,7 @@ export async function handle_post_template(req: Request, res: Response, next: Ne
 
         res.status(201).json({
             status: "success",
-            message: "Template added successfully.",
+            message: "Template created successfully.",
             data: data
         })
         return;

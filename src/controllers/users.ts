@@ -255,7 +255,7 @@ export async function handle_post_user(req: Request, res: Response, next: NextFu
 
         res.status(201).json({
             status: "success",
-            message: "User added successfully.",
+            message: "User created successfully.",
             data: data,
         })
         return;
@@ -284,7 +284,7 @@ export async function handle_post_user_address(req: Request, res: Response, next
 
         res.status(201).json({
             status: "success",
-            message: "Address added successfully.",
+            message: "Address created successfully.",
             data: data,
         })
         return;

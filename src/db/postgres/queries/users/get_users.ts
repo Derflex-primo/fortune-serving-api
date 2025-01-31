@@ -1,13 +1,12 @@
-import pool from "../config";
-import { User } from "../../../@codegen";
-import { Pagination } from "../../../types";
+import pool from "../../config";
+import { User } from "../../../../@codegen";
+import { Pagination } from "../../../../types";
 
 export default async function get_users(pagination: Pagination): Promise<Omit<User, "password" | "password_hash">[]> {
     const client = await pool.connect();
     const { limit, order, next_page } = pagination;
     
     try {
-
         const query = `
               SELECT 
                   id, 

@@ -1,12 +1,11 @@
-import pool from "../config";
-import { Address } from "../../../@codegen";
+import pool from "../../config";
+import { Address } from "../../../../@codegen";
 
 export default async function post_user_address(id: string, address: Address): Promise<Address> {
     const client = await pool.connect();
     const current_timestamp = new Date().toISOString();
 
     try {
-
         const query = `
               INSERT INTO addresses (
                  user_id,

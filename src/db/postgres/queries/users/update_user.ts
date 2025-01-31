@@ -1,5 +1,5 @@
-import pool from "../config";
-import { User } from "../../../@codegen";
+import pool from "../../config";
+import { User } from "../../../../@codegen";
 
 export default async function update_user(id: string, user: Partial<Omit<User, "password" | "password_hash">>) {
     const client = await pool.connect();
