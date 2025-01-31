@@ -364,6 +364,13 @@ export type PutUsersByIdAddressesByAddressIdData = {
     url: '/users/{id}/addresses/{address_id}';
 };
 
+export type GetTemplatesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/templates';
+};
+
 export type PostTemplatesData = {
     body?: never;
     path?: never;

@@ -61,6 +61,10 @@ paths:
       tags: 
         - "Templates"
       summary: "Create a new template."
+    get:
+      tags:
+        - "Templates"
+      summary: "Retrieve a non paginated list of templates."
 
 components:
   schemas:

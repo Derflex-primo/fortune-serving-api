@@ -10,7 +10,8 @@ import {
     handle_update_user_address,
     handle_delete_user,
     handle_delete_user_address,
-    handle_post_template
+    handle_post_template,
+    handle_get_templates
 } from "../controllers";
 import {
     validate_pagination_query,
@@ -115,5 +116,10 @@ router.post(
     "/templates",
     validate_post_template,
     handle_post_template
+)
+
+router.get(
+    "/templates",
+    handle_get_templates
 )
 export default router;

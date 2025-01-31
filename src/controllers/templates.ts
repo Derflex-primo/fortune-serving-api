@@ -30,4 +30,30 @@ export async function handle_post_template(req: Request, res: Response, next: Ne
         next(error)
         return;
     }
-} 
+}
+
+export async function handle_get_templates(req: Request, res: Response, next: NextFunction) {
+    try {
+        const data = await service.get_templates();
+ 
+        if (!data || data.length === 0) {
+            res.status(200).json({
+                status: "success",
+                message: "No templates found.",
+                data: data
+            })
+            return;
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "Templates fetched successfully.",
+            data: data
+        })
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}

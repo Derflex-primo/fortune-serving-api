@@ -1,6 +1,6 @@
 import { Template } from "../@codegen";
 import { ServiceProtection } from "./index";
-import { query_post_template } from "../db/postgres/queries";
+import { query_post_template, query_get_templates } from "../db/postgres/queries";
 
 export default class ServiceTemplate {
     private readonly protection: ServiceProtection;
@@ -21,6 +21,22 @@ export default class ServiceTemplate {
             return result;
         } catch (error) {
             console.error("Error creating template", error);
+            return null;
+        }
+    }
+
+    /**
+     * Returns a set of templates.
+     * @requires pagination must be done here, as of now, for mvp purposes i believe we dont have so much template to offer either.
+     * @returns A set of templates, non paginated. 
+     */
+    public async get_templates(): Promise<Template[] | null> {
+        try {
+            const result = await query_get_templates();
+
+            return result;
+        } catch (error) {
+            console.error("Error returning templates", error);
             return null;
         }
     }

@@ -11,4 +11,5 @@ export { default as query_delete_user } from "./users/delete_user";
 export { default as query_delete_user_address } from "./users/delete_user_address";
 
 //templates
+export { default as query_get_templates } from "./templates/get_templates";
 export { default as query_post_template } from "./templates/post_template";
