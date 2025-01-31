@@ -1,11 +1,10 @@
-import pool from "../config";
+import pool from "../../config";
 
 
 export default async function delete_user_address(id: string, address_id: string): Promise<boolean> {
     const client = await pool.connect();
 
     try {
-
         const query = `DELETE FROM addresses WHERE user_id = $1 AND id = $2`;
 
         const values = [id, address_id];

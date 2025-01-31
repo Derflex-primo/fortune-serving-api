@@ -24,7 +24,7 @@ export default class ServiceUser {
     }
 
     /**
-     * Adds a user in the users table along with their addresses.
+     * Creates a user in the users table along with their addresses.
      * @param user - The user object containing user details.
      * @returns The addded user object, excluding password and password_hash, and including addresses, or undefined if an error occurs.
      */
@@ -35,13 +35,13 @@ export default class ServiceUser {
 
             return result;
         } catch (error) {
-            console.error("Error registering user", error);
+            console.error("Error creating user", error);
             return null;
         }
     }
 
     /**
-     * Adds a address in addresses table.
+     * Creates a address in addresses table.
      * @param id - uuid format to be used as foreign key to add address.
      * @param address - The address object, containing required fields.
      * @returns The added address object.
@@ -52,7 +52,7 @@ export default class ServiceUser {
 
             return result;
         } catch (error) {
-            console.error("Error adding address", error);
+            console.error("Error creating address", error);
             return null;
         }
     }

@@ -1,13 +1,12 @@
-import pool from "../config";
-import { Address, User } from "../../../@codegen";
-import { UserRegistration } from "../../../types";
+import pool from "../../config";
+import { Address, User } from "../../../../@codegen";
+import { UserRegistration } from "../../../../types";
 
 export default async function register_user(user: UserRegistration & { password_hash: string }): Promise<User & { addresses: Address[] }> {
   const client = await pool.connect();
   const current_timestamp = new Date().toISOString();
 
   try {
-
     client.query('BEGIN');
 
     const user_query = `
@@ -77,7 +76,7 @@ export default async function register_user(user: UserRegistration & { password_
               city,
               postal_code,
               country;
-     `;
+      `;
 
     // should be in a bulk process
     const addresses = [];
