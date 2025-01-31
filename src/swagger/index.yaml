@@ -47,24 +47,29 @@ paths:
       tags:
         - "Users"
       summary: "Retrieve a user's address."
-    put: 
+    put:
       tags:
-       - "Users"
+        - "Users"
       summary: "Update user address fields by id and address_id."
     delete:
       tags:
-      - "Users"
+        - "Users"
       summary: "Delete user address fields by id and address_id."
-  
+
   /templates:
-    post: 
-      tags: 
+    post:
+      tags:
         - "Templates"
       summary: "Create a new template."
     get:
       tags:
         - "Templates"
       summary: "Retrieve a non paginated list of templates."
+  /templates/{id}:
+    get:
+      tags:
+        - "Templates"
+      summary: "Retrieve template by id."
 
 components:
   schemas:

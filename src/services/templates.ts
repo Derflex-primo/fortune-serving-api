@@ -1,6 +1,6 @@
 import { Template } from "../@codegen";
 import { ServiceProtection } from "./index";
-import { query_post_template, query_get_templates } from "../db/postgres/queries";
+import { query_post_template, query_get_templates, query_get_template } from "../db/postgres/queries";
 
 export default class ServiceTemplate {
     private readonly protection: ServiceProtection;
@@ -33,6 +33,22 @@ export default class ServiceTemplate {
     public async get_templates(): Promise<Template[] | null> {
         try {
             const result = await query_get_templates();
+
+            return result;
+        } catch (error) {
+            console.error("Error returning templates", error);
+            return null;
+        }
+    }
+
+    /**
+     * Returns template details.
+     * @param id - uuid format to identify which template to fetch.
+     * @returns Template details.
+     */
+    public async get_template(id: string): Promise<Template | null> {
+        try {
+            const result = query_get_template(id);
 
             return result;
         } catch (error) {

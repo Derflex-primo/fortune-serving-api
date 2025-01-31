@@ -377,3 +377,10 @@ export type PostTemplatesData = {
     query?: never;
     url: '/templates';
 };
+
+export type GetTemplatesByIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/templates/{id}';
+};
