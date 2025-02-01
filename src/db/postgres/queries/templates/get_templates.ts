@@ -6,7 +6,7 @@ export default async function get_templates(): Promise<Template[]> {
 
     try {
         const query = `
-              SElECT
+              SELECT
                 id,
                 name,
                 description,

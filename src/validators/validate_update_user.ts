@@ -13,25 +13,57 @@ export default async function validate_update_user(req: Request, res: Response, 
             return;
         }
 
-        let fields_to_update = {};
+        let fields_update = {};
 
-        if (user.full_name && typeof user.full_name === "string") {
-            Object.assign(fields_to_update, { full_name: user.full_name })
+        if (user.full_name) {
+            if (typeof user.full_name === "string") {
+                Object.assign(fields_update, { full_name: user.full_name })
+            } else {
+                res.status(400).json({
+                    valid: false,
+                    message: "Full name must be a non-empty string."
+                })
+                return;
+            }
         }
 
-        if (user.phone_number && typeof user.phone_number === "string") {
-            Object.assign(fields_to_update, { phone_number: user.phone_number })
+        if (user.email) {
+            if (typeof user.email === "string" && /\S+@\S+\.\S+/.test(user.email)) {
+                Object.assign(fields_update, { email: user.email })
+            } else {
+                res.status(400).json({
+                    valid: false,
+                    message: "Email must be valid and non-empty string."
+                })
+                return;
+            }
         }
 
-        if (user.email && typeof user.email === "string" && /\S+@\S+\.\S+/.test(user.email)) {
-            Object.assign(fields_to_update, { email: user.email })
+        if (user.phone_number) {
+            if (typeof user.phone_number === "string") {
+                Object.assign(fields_update, { phone_number: user.phone_number })
+            } else {
+                res.status(400).json({
+                    valid: false,
+                    message: "Phone number must be a string."
+                })
+                return;
+            }
         }
 
-        if (user.profile_image && typeof user.profile_image === "string") {
-            Object.assign(fields_to_update, { profile_image: user.profile_image })
+        if (user.profile_image) {
+            if (typeof user.profile_image === "string") {
+                Object.assign(fields_update, { profile_image: user.profile_image })
+            } else {
+                res.status(400).json({
+                    valid: false,
+                    message: "Profile image must be string"
+                })
+                return;
+            }
         }
 
-        if (Object.values(fields_to_update).length === 0) {
+        if (Object.values(fields_update).length === 0) {
             res.status(400).json({
                 valid: false,
                 message: "Nothing to update.",
@@ -39,7 +71,7 @@ export default async function validate_update_user(req: Request, res: Response, 
             return;
         }
 
-        res.locals = { user: fields_to_update }
+        res.locals = { user: fields_update }
         next()
         return;
     } catch (error) {

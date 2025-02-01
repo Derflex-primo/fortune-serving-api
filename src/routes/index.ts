@@ -21,7 +21,8 @@ import {
     validate_uuid,
     validate_update_user,
     validate_addresses,
-    validate_post_template
+    validate_post_template,
+    validate_update_template
 } from "../validators";
 
 const router = Router();
@@ -128,6 +129,12 @@ router.get(
     "/templates/:id",
     validate_uuid(["id"]),
     handle_get_template
+)
+
+router.patch(
+    "/templates/:id",
+    validate_uuid(["id"]),
+    validate_update_template
 )
 
 export default router;
