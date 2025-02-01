@@ -1,6 +1,6 @@
 import { Template } from "../@codegen";
 import { ServiceProtection } from "./index";
-import { query_post_template, query_get_templates, query_get_template } from "../db/postgres/queries";
+import { query_post_template, query_get_templates, query_get_template, query_update_template} from "../db/postgres/queries";
 
 export default class ServiceTemplate {
     private readonly protection: ServiceProtection;
@@ -53,6 +53,23 @@ export default class ServiceTemplate {
             return result;
         } catch (error) {
             console.error("Error returning templates", error);
+            return null;
+        }
+    }
+
+    /**
+     * Updates templates details.
+     * @param id - uuid format to identify which template to update.
+     * @param template  - The template details object to be udpate.
+     * @returns The updated templates details.
+     */
+    public async update_template(id: string, template: Template): Promise<Template | null> {
+        try {
+            const result = await query_update_template(id, template);
+
+            return result;
+        } catch (error) {
+            console.error("Error updating templates", error);
             return null;
         }
     }

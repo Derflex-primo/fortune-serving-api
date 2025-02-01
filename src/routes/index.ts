@@ -12,7 +12,8 @@ import {
     handle_delete_user_address,
     handle_post_template,
     handle_get_templates,
-    handle_get_template
+    handle_get_template,
+    handle_update_template
 } from "../controllers";
 import {
     validate_pagination_query,
@@ -134,7 +135,8 @@ router.get(
 router.patch(
     "/templates/:id",
     validate_uuid(["id"]),
-    validate_update_template
+    validate_update_template,
+    handle_update_template
 )
 
 export default router;

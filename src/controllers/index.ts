@@ -14,3 +14,4 @@ export { handle_delete_user_address } from "./users";
 export { handle_get_templates } from "./templates";
 export { handle_get_template } from "./templates";
 export { handle_post_template } from "./templates";
+export { handle_update_template } from "./templates";

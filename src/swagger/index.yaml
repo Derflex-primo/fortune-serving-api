@@ -70,6 +70,10 @@ paths:
       tags:
         - "Templates"
       summary: "Retrieve template by id."
+    patch: 
+      tags: 
+        - "Templates"
+      summary: "Updates template by id."
 
 components:
   schemas:

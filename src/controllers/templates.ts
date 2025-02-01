@@ -86,3 +86,32 @@ export async function handle_get_template(req: Request, res: Response, next: Nex
         return;
     }
 }
+
+export async function handle_update_template(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const { template } = res.locals;
+
+    try {
+        const data = await service.update_template(id, template);
+
+        if (!data) {
+            res.status(404).json({
+                status: "failed",
+                message: "Template does not exist.",
+                data: null
+            })
+            return;
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "Template updated successfully.",
+            data: data
+        })
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}
