@@ -13,7 +13,8 @@ import {
     handle_post_template,
     handle_get_templates,
     handle_get_template,
-    handle_update_template
+    handle_update_template,
+    handle_delete_template
 } from "../controllers";
 import {
     validate_pagination_query,
@@ -23,7 +24,7 @@ import {
     validate_update_user,
     validate_addresses,
     validate_post_template,
-    validate_update_template
+    validate_update_template,
 } from "../validators";
 
 const router = Router();
@@ -137,6 +138,12 @@ router.patch(
     validate_uuid(["id"]),
     validate_update_template,
     handle_update_template
+)
+
+router.delete(
+    "/templates/:id",
+    validate_uuid(["id"]),
+    handle_delete_template
 )
 
 export default router;

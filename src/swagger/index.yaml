@@ -73,7 +73,11 @@ paths:
     patch: 
       tags: 
         - "Templates"
-      summary: "Updates template by id."
+      summary: "Update template by id."
+    delete: 
+      tags:
+        - "Templates"
+      summary: "Delete template by id."
 
 components:
   schemas:

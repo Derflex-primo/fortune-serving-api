@@ -1,6 +1,12 @@
 import { Template } from "../@codegen";
 import { ServiceProtection } from "./index";
-import { query_post_template, query_get_templates, query_get_template, query_update_template} from "../db/postgres/queries";
+import {
+    query_post_template,
+    query_get_templates, 
+    query_get_template, 
+    query_update_template, 
+    query_delete_template
+} from "../db/postgres/queries";
 
 export default class ServiceTemplate {
     private readonly protection: ServiceProtection;
@@ -20,7 +26,7 @@ export default class ServiceTemplate {
 
             return result;
         } catch (error) {
-            console.error("Error creating template", error);
+            console.error("Error in creating template", error);
             return null;
         }
     }
@@ -36,7 +42,7 @@ export default class ServiceTemplate {
 
             return result;
         } catch (error) {
-            console.error("Error returning templates", error);
+            console.error("Error in returning templates", error);
             return null;
         }
     }
@@ -52,7 +58,7 @@ export default class ServiceTemplate {
 
             return result;
         } catch (error) {
-            console.error("Error returning templates", error);
+            console.error("Error in returning templates", error);
             return null;
         }
     }
@@ -69,7 +75,23 @@ export default class ServiceTemplate {
 
             return result;
         } catch (error) {
-            console.error("Error updating templates", error);
+            console.error("Error in updating templates", error);
+            return null;
+        }
+    }
+
+    /**
+     * Deletes template entirely.
+     * @param id - uuid format to identify which template to delete.
+     * @returns A boolean value.
+     */
+    public async delete_template(id: string): Promise<boolean | null> {
+        try {
+            const result = await query_delete_template(id);
+
+            return result;
+        } catch (error) {
+            console.error("Error in deleting templates", error);
             return null;
         }
     }

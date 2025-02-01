@@ -115,3 +115,31 @@ export async function handle_update_template(req: Request, res: Response, next: 
         return;
     }
 }
+
+export async function handle_delete_template(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+
+    try {
+        const data = await service.delete_template(id);
+
+        if (!data) {
+            res.status(404).json({
+                status: "failed",
+                message: "Template not found.",
+                data: null
+            })
+            return;
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "Template deleted successfully.",
+            data: null
+        })
+        return;
+    } catch (error) {
+        console.error(error)
+        next(error)
+        return;
+    }
+}

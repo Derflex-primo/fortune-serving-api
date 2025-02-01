@@ -21,7 +21,7 @@ export default async function get_templates(): Promise<Template[]> {
         return result.rows
     } catch (error) {
 
-        console.error(error)
+        console.error("Transaction failed: get_templates", error);
         throw error;
 
     } finally {

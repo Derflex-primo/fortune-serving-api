@@ -42,7 +42,7 @@ export default async function post_template(template: Template): Promise<Templat
         return result.rows[0];
     } catch (error) {
 
-        console.error(error)
+        console.error("Transaction failed: post_template", error);
         throw error;
 
     } finally {

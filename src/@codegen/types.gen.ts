@@ -378,7 +378,21 @@ export type PostTemplatesData = {
     url: '/templates';
 };
 
+export type DeleteTemplatesByIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/templates/{id}';
+};
+
 export type GetTemplatesByIdData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/templates/{id}';
+};
+
+export type PatchTemplatesByIdData = {
     body?: never;
     path?: never;
     query?: never;

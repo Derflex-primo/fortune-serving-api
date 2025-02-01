@@ -22,7 +22,7 @@ export default async function get_template(id: string): Promise<Template> {
         return result.rows[0];
     } catch (error) {
 
-        console.error(error)
+        console.error("Transaction failed: get_template", error);
         throw error;
 
     } finally {
