@@ -111,7 +111,7 @@ router.delete(
 /** --------------------------------------------------------------------------------------
  *                                                                                       *
  * @author        Templates                                                              *
- * @description   Routes for managing user addresses, including creation, retrieval,     *
+ * @description   Routes for managing templates, including creation, retrieval,          *
  *                updates, and deletion.                                                 *
  *                                                                                       *
  * --------------------------------------------------------------------------------------*/
