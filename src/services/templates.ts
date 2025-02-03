@@ -1,6 +1,12 @@
 import { Template } from "../@codegen";
 import { ServiceProtection } from "./index";
-import { query_post_template } from "../db/postgres/queries";
+import {
+    query_post_template,
+    query_get_templates, 
+    query_get_template, 
+    query_update_template, 
+    query_delete_template
+} from "../db/postgres/queries";
 
 export default class ServiceTemplate {
     private readonly protection: ServiceProtection;
@@ -20,7 +26,72 @@ export default class ServiceTemplate {
 
             return result;
         } catch (error) {
-            console.error("Error creating template", error);
+            console.error("Error in creating template", error);
+            return null;
+        }
+    }
+
+    /**
+     * Returns a set of templates.
+     * @requires pagination must be done here, as of now, for mvp purposes i believe we dont have so much template to offer either.
+     * @returns A set of templates, non paginated. 
+     */
+    public async get_templates(): Promise<Template[] | null> {
+        try {
+            const result = await query_get_templates();
+
+            return result;
+        } catch (error) {
+            console.error("Error in returning templates", error);
+            return null;
+        }
+    }
+
+    /**
+     * Returns template details.
+     * @param id - uuid format to identify which template to fetch.
+     * @returns Template details.
+     */
+    public async get_template(id: string): Promise<Template | null> {
+        try {
+            const result = query_get_template(id);
+
+            return result;
+        } catch (error) {
+            console.error("Error in returning templates", error);
+            return null;
+        }
+    }
+
+    /**
+     * Updates templates details.
+     * @param id - uuid format to identify which template to update.
+     * @param template  - The template details object to be udpate.
+     * @returns The updated templates details.
+     */
+    public async update_template(id: string, template: Template): Promise<Template | null> {
+        try {
+            const result = await query_update_template(id, template);
+
+            return result;
+        } catch (error) {
+            console.error("Error in updating templates", error);
+            return null;
+        }
+    }
+
+    /**
+     * Deletes template entirely.
+     * @param id - uuid format to identify which template to delete.
+     * @returns A boolean value.
+     */
+    public async delete_template(id: string): Promise<boolean | null> {
+        try {
+            const result = await query_delete_template(id);
+
+            return result;
+        } catch (error) {
+            console.error("Error in deleting templates", error);
             return null;
         }
     }

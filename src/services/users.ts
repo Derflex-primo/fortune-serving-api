@@ -35,7 +35,7 @@ export default class ServiceUser {
 
             return result;
         } catch (error) {
-            console.error("Error creating user", error);
+            console.error("Error in creating user", error);
             return null;
         }
     }
@@ -52,7 +52,7 @@ export default class ServiceUser {
 
             return result;
         } catch (error) {
-            console.error("Error creating address", error);
+            console.error("Error in creating address", error);
             return null;
         }
     }

@@ -10,7 +10,11 @@ import {
     handle_update_user_address,
     handle_delete_user,
     handle_delete_user_address,
-    handle_post_template
+    handle_post_template,
+    handle_get_templates,
+    handle_get_template,
+    handle_update_template,
+    handle_delete_template
 } from "../controllers";
 import {
     validate_pagination_query,
@@ -19,7 +23,8 @@ import {
     validate_uuid,
     validate_update_user,
     validate_addresses,
-    validate_post_template
+    validate_post_template,
+    validate_update_template,
 } from "../validators";
 
 const router = Router();
@@ -106,7 +111,7 @@ router.delete(
 /** --------------------------------------------------------------------------------------
  *                                                                                       *
  * @author        Templates                                                              *
- * @description   Routes for managing user addresses, including creation, retrieval,     *
+ * @description   Routes for managing templates, including creation, retrieval,          *
  *                updates, and deletion.                                                 *
  *                                                                                       *
  * --------------------------------------------------------------------------------------*/
@@ -116,4 +121,29 @@ router.post(
     validate_post_template,
     handle_post_template
 )
+
+router.get(
+    "/templates",
+    handle_get_templates
+)
+
+router.get(
+    "/templates/:id",
+    validate_uuid(["id"]),
+    handle_get_template
+)
+
+router.patch(
+    "/templates/:id",
+    validate_uuid(["id"]),
+    validate_update_template,
+    handle_update_template
+)
+
+router.delete(
+    "/templates/:id",
+    validate_uuid(["id"]),
+    handle_delete_template
+)
+
 export default router;

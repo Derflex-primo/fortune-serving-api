@@ -8,3 +8,4 @@ export { default as validate_addresses } from "./validate_addresses";
 
 // templates
 export { default as validate_post_template } from './validate_post_template';
+export { default as validate_update_template } from './validate_update_template';
