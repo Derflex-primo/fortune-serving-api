@@ -13,9 +13,8 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(auth(config));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(yaml.parse(readFileSync('./src/swagger/output/bundled.yaml', 'utf8'))))
-app.use('/apiv1', router);
+app.use('/apiv1', auth(config), router);
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello, TypeScript Express!");
