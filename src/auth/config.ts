@@ -1,7 +1,7 @@
 const config = {
-    audience: 'https://fortuneserving-api.com',
-    issuerBaseURL: 'https://dev-m8h20qvrxlwgronx.us.auth0.com/',
-    tokenSigningAlg: 'RS256'
-}
+    audience: process.env.AUTH0_AUDIENCE || "",
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL || "",
+    tokenSigningAlg: process.env.AUTH0_SIGNIN_ALGO || ""
+};
 
 export default config;

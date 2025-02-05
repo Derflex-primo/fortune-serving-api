@@ -1,3 +1,1 @@
-/**
- * for extensive transactions
- */
+export { default as auth_development_bypass } from './auth_development_bypass';
