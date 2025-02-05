@@ -120,30 +120,30 @@ router.post(
     "/templates",
     validate_post_template,
     handle_post_template
-)
+);
 
 router.get(
     "/templates",
     handle_get_templates
-)
+);
 
 router.get(
     "/templates/:id",
     validate_uuid(["id"]),
     handle_get_template
-)
+);
 
 router.patch(
     "/templates/:id",
     validate_uuid(["id"]),
     validate_update_template,
     handle_update_template
-)
+);
 
 router.delete(
     "/templates/:id",
     validate_uuid(["id"]),
     handle_delete_template
-)
+);
 
 export default router;

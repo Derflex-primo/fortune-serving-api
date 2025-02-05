@@ -3,7 +3,7 @@ node_modules
 src/swagger/output
 src/@types
 .env
-
+.env.development
 # playwright
 /playwright-report/
 /playwright-results/
