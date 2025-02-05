@@ -15,8 +15,8 @@ import { auth_development_bypass } from "./middlewares";
 const app = express();
 const port = 3000;
 
-app.use(cors())
-app.use(helmet())
+app.use(cors());
+app.use(helmet());
 app.use(express.json());
 
 app.use("/apiv1", swaggerUi.serve, swaggerUi.setup(yaml.parse(readFileSync('./src/swagger/output/bundled.yaml', 'utf8'))))
